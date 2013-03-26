@@ -1,0 +1,63 @@
+{% load i18n %}
+{% load url from future %}
+{% spaceless %}
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>{% block title %}TrainingApp{% endblock %}</title>
+        {% block css %}
+            <link href="//netdna.bootstrapcdn.com/bootswatch/2.3.1/cerulean/bootstrap.min.css" rel="stylesheet">
+        {% endblock css %}
+        {% block js %}
+            <!--[if lt IE 9]>
+                <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+            <![endif]-->
+            <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+            <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+        {% endblock js %}
+    </head>
+    <body style="padding-top: 100px;" data-spy="scroll">
+    {% block navbar %}
+        <div class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <a class="brand" href="../">TrainingApp</a>
+
+                    <div class="nav-collapse collapse" id="main-menu">
+                        <ul class="nav" id="main-menu-left">
+                            <li><a id="swatch-link" href="../#gallery">Gallery</a></li>
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Preview <b class="caret"></b></a>
+                                <ul class="dropdown-menu" id="swatch-menu">
+                                    <li><a href="../united">United</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <ul class="nav pull-right" id="main-menu-right">
+                            {% if user.is_loggedin %}
+
+                            {% else %}
+                                <li><a rel="tooltip" href="{% url 'pageSignUp' %}">{% trans "Sign Up" %}<i
+                                        class="icon-share-alt"></i></a></li>
+
+                                <li><a rel="tooltip" href="{% url 'pageSignIn' %}">{% trans "Sign In" %}<i
+                                        class="icon-share-alt"></i></a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endblock navbar %}
+    {% block page %}
+    {% endblock page %}
+    {% block foot %}
+    {% endblock foot %}
+    </body>
+    </html>
+{% endspaceless %}

@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block page %}
+    <div class="container">
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ userForm.as_ul }}
+            {{ authorForm.as_ul }}
+            <input type="submit" value="{% trans "submit" %}" />
+        </form>
+    </div>
+{% endblock page %}

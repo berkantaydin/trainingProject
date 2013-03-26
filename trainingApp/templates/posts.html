@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block page %}
+    <div class="container">
+    {% if posts %}
+        {% for i in posts %}
+            {{ i.date_pub }}
+        {% endfor %}
+    {% else %}
+        {% trans "We have not any posts yet. Would you like to post something?" %}
+    {% endif %}
+    </div>
+{% endblock page %}
