@@ -3,10 +3,9 @@
 {% load url from future %}
 {% block page %}
     <div class="container">
-        <form action="{% url "pageSignUp" %}" method="post" enctype="multipart/form-data">
+        <form action="{% url "pageSignIn" %}" method="post">
             {% csrf_token %}
-            {{ userForm.as_p}}
-            {{ authorForm.as_p }}
+            {{ loginForm.as_p}}
             <input type="submit" class="btn btn-primary" value="{% trans "submit" %}" />
         </form>
     </div>

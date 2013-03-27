@@ -6,16 +6,16 @@ from django.core.urlresolvers import reverse
 
 # Need for long time... Need Rabbit MQ..! Need some little good things.
 
-# Daha sonra Q'dan gönderir hale getirilecek //BA--
+# Daha sonra Q'dan gonderir hale getirilecek //BA--
 
 
 def sendConfirmationMail(user_id):
-    user = User.objects.filter(id=user_id)[0]
+    user = User.objects.get(id=user_id)
 
     if user.is_active:
         raise ValueError(_('%s is already activated') % user.username)
 
-    author = Author.objects.filter(user=user_id)[0]
+    author = Author.objects.get(user=user_id)
     link = reverse('pageConfirmMail', kwargs={'key': author.key_activation})
 
     return send_mail(_('Activation Mail'),

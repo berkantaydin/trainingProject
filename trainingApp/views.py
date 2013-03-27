@@ -5,6 +5,8 @@ from models import Post
 from datetime import datetime
 from forms import UserForm
 from forms import AuthorForm
+from forms import LoginForm
+from tasks import sendConfirmationMail
 
 
 def post(request, post_id):
@@ -23,6 +25,7 @@ def signUp(request):
         if uf.is_valid() and af.is_valid():
             user = uf.save(commit=False)
             user.is_active = False
+            user.set_password(user.password)
             user.save()
             author = af.save(commit=False)
             author.user = user
@@ -38,7 +41,14 @@ def signUp(request):
 
 
 def signIn(request):
-    return HttpResponse('signin')
+    if request.method == 'POST':
+        lf = LoginForm(request.POST, prefix='login')
+        if lf.is_valid():
+            # Authenticating process.
+            return HttpResponseRedirect('profile')
+    else:
+        lf = LoginForm(prefix='login')
+    return render(request, 'signin.html', dict(loginForm=lf))
 
 
 def confirmMail(request):

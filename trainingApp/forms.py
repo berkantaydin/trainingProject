@@ -1,6 +1,7 @@
 from django.utils.translation import ugettext as _
 from django import forms
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate
 from models import Author
 
 
@@ -56,3 +57,27 @@ class AuthorForm(forms.ModelForm):
     class Meta:
         model = Author
         fields = ['avatar']
+
+
+class LoginForm(forms.ModelForm):
+    password = forms.CharField(_('Password'), widget=forms.PasswordInput,)
+
+    class Meta:
+        model = User
+        fields = ['email', 'password']
+
+    def clean(self):
+        """
+        login
+        """
+        email = self.cleaned_data.get('email')
+        password = self.cleaned_data.get('password')
+
+        if email and password:
+            user_cache = authenticate(email=email, password=password)
+            if user_cache is None:
+                raise forms.ValidationError(_("Please enter a correct username and password."))
+            elif not user_cache.is_active:
+                raise forms.ValidationError(_("This account is not activated, please check your email for activation."))
+        return self.cleaned_data
+

@@ -22,6 +22,6 @@ urlpatterns += patterns('trainingApp.views',
                         url(r'^post/(?P<post_id>\d+)/$', 'post'),
                         url(r'^signUp/$', 'signUp', name='pageSignUp'),
                         url(r'^signIn/$', 'signIn', name='pageSignIn'),
-                        url(r'^cmail/$', 'confirmMail', name='pageConfirmMail'),
+                        url(r'^cmail/(?P<key>\w+)$', 'confirmMail', name='pageConfirmMail'),
                         )
 
