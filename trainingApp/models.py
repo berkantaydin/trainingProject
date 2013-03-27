@@ -2,6 +2,7 @@ from django.db import models
 from datetime import datetime
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext as _
+import random
 
 
 class Author(models.Model):
@@ -9,6 +10,7 @@ class Author(models.Model):
     avatar = models.ImageField(upload_to='uploads')
     is_deleted = models.BooleanField(default=False)
     is_verified = models.BooleanField(default=False)
+    key_activation = models.CharField(max_length=12, default=str(random.random())[2:14])
 
     def email(self):
         return self.user.email
@@ -37,4 +39,12 @@ class Post(models.Model):
     author = models.ForeignKey(Author)
     text_title = models.CharField(max_length=70)
     text_body = models.TextField()
+    date_pub = models.DateTimeField(default=datetime.now)
+
+
+class Comment(models.Model):
+    author = models.ForeignKey(Author)
+    parent = models.ManyToManyField('self', symmetrical=False)
+    text_body = models.TextField()
+    is_hide = models.BooleanField(default=True)
     date_pub = models.DateTimeField(default=datetime.now)

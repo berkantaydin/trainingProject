@@ -2,11 +2,11 @@
 {% load i18n %}
 {% block page %}
     <div class="container">
-        <form action="" method="post">
+        <form action="" method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            {{ userForm.as_ul }}
-            {{ authorForm.as_ul }}
-            <input type="submit" value="{% trans "submit" %}" />
+            {{ userForm.as_p}}
+            {{ authorForm.as_p }}
+            <input type="submit" class="btn btn-primary" value="{% trans "submit" %}" />
         </form>
     </div>
 {% endblock page %}

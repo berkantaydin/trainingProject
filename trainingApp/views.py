@@ -6,6 +6,7 @@ from datetime import datetime
 from forms import UserForm
 from forms import AuthorForm
 
+
 def post(request, post_id):
     return HttpResponse(post_id)
 
@@ -18,19 +19,22 @@ def posts(request):
 def signUp(request):
     if request.method == 'POST':
         uf = UserForm(request.POST, prefix='user')
-        af = AuthorForm(request.POST, prefix='author')
+        af = AuthorForm(request.POST, request.FILES, prefix='author')
         if uf.is_valid() and af.is_valid():
-            #validation burada olacak
-            user = uf.save()
+            user = uf.save(commit=False)
+            user.is_active = False
+            user.save()
             author = af.save(commit=False)
             author.user = user
             author.save()
-            return HttpResponseRedirect('/testtooo/')
+            ## Kuyruga yolla mail atilsin -> user.mail -> activation mail send
+            ## Resim kirpilip bicilsin, isimlendirilip kayit guncellensin - Kuyruktan update edilsin -
+            return HttpResponseRedirect('/activation_information/')
     else:
         uf = UserForm(prefix='user')
         af = AuthorForm(prefix='author')
 
-    return render(request, 'signup.html', dict(userForm=uf, AuthorForm=af),)
+    return render(request, 'signup.html', dict(userForm=uf, authorForm=af),)
 
 
 def signIn(request):
