@@ -123,7 +123,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
-    'trainingProject.trainingApp',
+    'trainingApp',
     'django_extensions',
 )
 
@@ -149,3 +149,5 @@ LOGGING = {
         },
     }
 }
+
+AUTHENTICATION_BACKENDS = ('trainingApp.backends.auth.EmailAuthBackend',)

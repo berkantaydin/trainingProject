@@ -20,8 +20,10 @@ urlpatterns += patterns('trainingApp.views',
                         url(r'^$', 'posts', name='pageHome'),
                         url(r'^posts/$', 'posts'),
                         url(r'^post/(?P<post_id>\d+)/$', 'post'),
+                        url(r'^profile/(?P<user_id>\d+)/$', 'profile', name='pageProfile'),
                         url(r'^signUp/$', 'signUp', name='pageSignUp'),
                         url(r'^signIn/$', 'signIn', name='pageSignIn'),
+                        url(r'^signOut/$', 'signOut', name='pageSignOut'),
                         url(r'^cmail/(?P<key>\w+)$', 'confirmMail', name='pageConfirmMail'),
                         )
 

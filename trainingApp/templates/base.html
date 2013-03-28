@@ -44,8 +44,11 @@
                             </li>
                         </ul>
                         <ul class="nav pull-right" id="main-menu-right">
-                            {% if user.is_loggedin %}
-
+                            {% if user.id %}
+                                <li><a rel="tooltip" href="{% url 'pageProfile' user_id=user.id %}">{% trans "Profile" %}<i
+                                        class="icon-share-alt"></i></a></li>
+                                <li><a rel="tooltip" href="{% url 'pageSignOut' %}">{% trans "Sign Out" %}<i
+                                        class="icon-share-alt"></i></a></li>
                             {% else %}
                                 <li><a rel="tooltip" href="{% url 'pageSignUp' %}">{% trans "Sign Up" %}<i
                                         class="icon-share-alt"></i></a></li>
@@ -70,7 +73,6 @@
             {% endfor %}
 
     {% endif %}
-
     {% block page %}
     {% endblock page %}
     {% block foot %}

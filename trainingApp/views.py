@@ -1,14 +1,12 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
-from models import Post, User
+from models import Post, User, Author
 from datetime import datetime
 from forms import AuthorForm, UserForm, LoginForm
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.utils.translation import gettext as _
 from django.core.urlresolvers import reverse
 from django.contrib import messages
-from tasks import sendConfirmationMail
-
 
 def post(request, post_id):
     return HttpResponse(post_id)
@@ -31,7 +29,7 @@ def signUp(request):
             author = af.save(commit=False)
             author.user = user
             author.save()
-            ## Kuyruga yolla mail atilsin -> user.mail -> activation mail send
+            ## sendConfirmationMail.delay(user.id)
             ## Resim kirpilip bicilsin, isimlendirilip kayit guncellensin - Kuyruktan update edilsin -
             messages.success(request, _('Sign Up Success!'))
             messages.info(request, _('Please go to your inbox and read the activation mail'))
@@ -47,18 +45,17 @@ def signIn(request):
     if request.method == 'POST':
         lf = LoginForm(request.POST, prefix='login')
         if lf.is_valid():
-
             email = lf.cleaned_data['email']
             password = lf.cleaned_data['password']
 
-            #user = authenticate(email=email, password=password)
+            user = authenticate(username=email, password=password)
 
-            user = User.objects.get(email=email)
-
-            if user is not None and user.check_password(password):
+            if user is not None:
                 if user.is_active:
-                    login(lf.cleaned_data, user)
+                    login(request, user)
                     #Redirect for success
+                    messages.success(request,
+                                     _("Login Successful"))
                     return HttpResponseRedirect(reverse('pageHome'))
                 else:
                     messages.error(request,
@@ -71,6 +68,20 @@ def signIn(request):
     else:
         lf = LoginForm(prefix='login')
     return render(request, 'signin.html', dict(loginForm=lf))
+
+
+def signOut(request):
+    logout(request)
+    messages.success(request,
+                     _("Good Bye! We will miss you :("))
+    return HttpResponseRedirect(reverse('pageHome'))
+
+
+def profile(request, user_id):
+    user = User.objects.get(pk=user_id)
+    author = Author.objects.get(user=user)
+    # ba nın authoru yok. onu eşleştir, çalışacaktır.
+    return render(request, 'profile.html')
 
 
 def confirmMail(request):

@@ -1,14 +1,15 @@
+from celery.task import task
 from django.core.mail import send_mail
 from django.utils.translation import gettext as _
 from models import User
 from models import Author
 from django.core.urlresolvers import reverse
 
-# Need for long time... Need Rabbit MQ..! Need some little good things.
+# Need for long time... Need Rabbit MQ..! OR Need Redis ?? Need some little good things.
 
 # Daha sonra Q'dan gonderir hale getirilecek //BA--
 
-
+@task(ignore_result=True)
 def sendConfirmationMail(user_id):
     user = User.objects.get(id=user_id)
 
