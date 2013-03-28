@@ -1,11 +1,12 @@
-from django.http import HttpResponse
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
-from models import Post
+from models import Post, User
 from datetime import datetime
-from forms import UserForm
-from forms import AuthorForm
-from forms import LoginForm
+from forms import AuthorForm, UserForm, LoginForm
+from django.contrib.auth import authenticate, login
+from django.utils.translation import gettext as _
+from django.core.urlresolvers import reverse
+from django.contrib import messages
 from tasks import sendConfirmationMail
 
 
@@ -32,7 +33,9 @@ def signUp(request):
             author.save()
             ## Kuyruga yolla mail atilsin -> user.mail -> activation mail send
             ## Resim kirpilip bicilsin, isimlendirilip kayit guncellensin - Kuyruktan update edilsin -
-            return HttpResponseRedirect('/activation_information/')
+            messages.success(request, _('Sign Up Success!'))
+            messages.info(request, _('Please go to your inbox and read the activation mail'))
+            return HttpResponseRedirect(reverse('pageSignUp'))
     else:
         uf = UserForm(prefix='user')
         af = AuthorForm(prefix='author')
@@ -44,8 +47,27 @@ def signIn(request):
     if request.method == 'POST':
         lf = LoginForm(request.POST, prefix='login')
         if lf.is_valid():
-            # Authenticating process.
-            return HttpResponseRedirect('profile')
+
+            email = lf.cleaned_data['email']
+            password = lf.cleaned_data['password']
+
+            #user = authenticate(email=email, password=password)
+
+            user = User.objects.get(email=email)
+
+            if user is not None and user.check_password(password):
+                if user.is_active:
+                    login(lf.cleaned_data, user)
+                    #Redirect for success
+                    return HttpResponseRedirect(reverse('pageHome'))
+                else:
+                    messages.error(request,
+                                   _("This account is not activated, please check your email for activation."))
+                    return HttpResponseRedirect(reverse('pageSignIn'))
+            else:
+                messages.error(request,
+                               _("Please enter a correct username and password."))
+                return HttpResponseRedirect(reverse('pageSignIn'))
     else:
         lf = LoginForm(prefix='login')
     return render(request, 'signin.html', dict(loginForm=lf))

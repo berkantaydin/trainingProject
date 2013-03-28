@@ -16,7 +16,7 @@
             <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
         {% endblock js %}
         <script type="text/javascript">
-            $(document).ready(function(){
+            $(document).ready(function () {
                 $('.errorlist').addClass('help-inline');
             })
         </script>
@@ -59,6 +59,18 @@
             </div>
         </div>
     {% endblock navbar %}
+
+    {% if messages %}
+
+            {% for message in messages %}
+                <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+                <a class="close" data-dismiss="alert">×</a>
+                {% if message.tags %}<strong>{{ message.tags|capfirst }}! </strong>{% endif %}{{ message }}
+                </div>
+            {% endfor %}
+
+    {% endif %}
+
     {% block page %}
     {% endblock page %}
     {% block foot %}

@@ -17,7 +17,7 @@ urlpatterns = patterns('',
 )
 
 urlpatterns += patterns('trainingApp.views',
-                        url(r'^$', 'posts'),
+                        url(r'^$', 'posts', name='pageHome'),
                         url(r'^posts/$', 'posts'),
                         url(r'^post/(?P<post_id>\d+)/$', 'post'),
                         url(r'^signUp/$', 'signUp', name='pageSignUp'),
