@@ -52,14 +52,27 @@ def signIn(request):
 
             if user is not None:
                 if user.is_active:
+                    author = Author.objects.get(user=user)
+
+                    if not author.DoesNotExist:
+                        messages.error(request,
+                                       _("This user have not any author profile."))
+                        return HttpResponseRedirect(reverse("pageSignIn"))
+
                     login(request, user)
+
                     #Redirect for success
                     messages.success(request,
-                                     _("Login Successful"))
+                                     _("Login Successful."))
+
+                    if author.is_verified is False:
+                        messages.warning(request, _("Your account not verified."))
+                        return HttpResponseRedirect(reverse('pageProfile', args=(user.id,)))
+
                     return HttpResponseRedirect(reverse('pageHome'))
                 else:
                     messages.error(request,
-                                   _("This account is not activated, please check your email for activation."))
+                                   _("This account is not active."))
                     return HttpResponseRedirect(reverse('pageSignIn'))
             else:
                 messages.error(request,
@@ -80,7 +93,7 @@ def signOut(request):
 def profile(request, user_id):
     user = User.objects.get(pk=user_id)
     author = Author.objects.get(user=user)
-    # ba nın authoru yok. onu eşleştir, çalışacaktır.
+    # ba nin authoru yok. onu eslestir, calisacaktir
     return render(request, 'profile.html')
 
 
