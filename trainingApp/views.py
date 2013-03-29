@@ -7,6 +7,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.utils.translation import gettext as _
 from django.core.urlresolvers import reverse
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 
 def post(request, post_id):
@@ -63,7 +64,9 @@ def signIn(request):
                     login(request, user)
 
                     #Session variables
-                    request.session['avatar'] = author.avatar
+                    request.session['author__id'] = author.id
+                    request.session['author__is_verified'] = author.is_verified
+                    request.session['author__avatar'] = author.avatar
 
                     #Redirect for success
                     messages.success(request,
@@ -104,6 +107,8 @@ def profile(request, user_id):
     request.session['avatar'] = author.avatar
     return render(request, 'profile.html', (user, author))
 
+def postAdd(request):
+    return render(request, 'postadd.html')
 
 def confirmMail(request):
     return HttpResponse('ConfirmMail')

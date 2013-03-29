@@ -45,6 +45,9 @@
                         </ul>
                         <ul class="nav pull-right" id="main-menu-right">
                             {% if user.id %}
+                                {% if request.session.author__is_verified %}
+                                    <li><a rel="tooltip" href="{% url 'pagePostAdd' %}">{% trans "Add Post" %}</li>
+                                {% endif %}
                                 <li><a rel="tooltip" href="{% url 'pageProfile' user_id=user.id %}">{% trans "Profile" %}
                                     <img src="{{ request.session.avatar }}"></a></li>
                                 <li><a rel="tooltip" href="{% url 'pageSignOut' %}">{% trans "Sign Out" %}<i
