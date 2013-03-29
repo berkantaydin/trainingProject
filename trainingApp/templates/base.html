@@ -45,8 +45,8 @@
                         </ul>
                         <ul class="nav pull-right" id="main-menu-right">
                             {% if user.id %}
-                                <li><a rel="tooltip" href="{% url 'pageProfile' user_id=user.id %}">{% trans "Profile" %}<i
-                                        class="icon-share-alt"></i></a></li>
+                                <li><a rel="tooltip" href="{% url 'pageProfile' user_id=user.id %}">{% trans "Profile" %}
+                                    <img src="{{ request.session.avatar }}"></a></li>
                                 <li><a rel="tooltip" href="{% url 'pageSignOut' %}">{% trans "Sign Out" %}<i
                                         class="icon-share-alt"></i></a></li>
                             {% else %}

@@ -125,6 +125,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     'trainingApp',
     'django_extensions',
+    'djcelery'
 )
 
 # A sample logging configuration. The only tangible logging
@@ -151,3 +152,5 @@ LOGGING = {
 }
 
 AUTHENTICATION_BACKENDS = ('trainingApp.backends.auth.EmailAuthBackend',)
+EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+EMAIL_FILE_PATH = '/tmp/emails-trainingApp'

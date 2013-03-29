@@ -12,8 +12,8 @@ from django.core.urlresolvers import reverse
 @task(ignore_result=True)
 def sendConfirmationMail(user_id):
     user = User.objects.get(id=user_id)
-
-    if user.is_active:
+    author = Author.objects.get(user=user)
+    if author.is_verified:
         raise ValueError(_('%s is already activated') % user.username)
 
     author = Author.objects.get(user=user_id)

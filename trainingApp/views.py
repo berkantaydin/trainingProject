@@ -8,6 +8,7 @@ from django.utils.translation import gettext as _
 from django.core.urlresolvers import reverse
 from django.contrib import messages
 
+
 def post(request, post_id):
     return HttpResponse(post_id)
 
@@ -23,7 +24,7 @@ def signUp(request):
         af = AuthorForm(request.POST, request.FILES, prefix='author')
         if uf.is_valid() and af.is_valid():
             user = uf.save(commit=False)
-            user.is_active = False
+            user.is_active = True
             user.set_password(user.password)
             user.save()
             author = af.save(commit=False)
@@ -61,12 +62,16 @@ def signIn(request):
 
                     login(request, user)
 
+                    #Session variables
+                    request.session['avatar'] = author.avatar
+
                     #Redirect for success
                     messages.success(request,
                                      _("Login Successful."))
 
                     if author.is_verified is False:
-                        messages.warning(request, _("Your account not verified."))
+                        messages.warning(request,
+                                         _("Your account not verified. Please read your mail for verify process."))
                         return HttpResponseRedirect(reverse('pageProfile', args=(user.id,)))
 
                     return HttpResponseRedirect(reverse('pageHome'))
@@ -93,8 +98,11 @@ def signOut(request):
 def profile(request, user_id):
     user = User.objects.get(pk=user_id)
     author = Author.objects.get(user=user)
-    # ba nin authoru yok. onu eslestir, calisacaktir
-    return render(request, 'profile.html')
+    if not author.is_verified:
+        messages.warning(request, _('Your account not verified. Please read your mail for verify process.'))
+
+    request.session['avatar'] = author.avatar
+    return render(request, 'profile.html', (user, author))
 
 
 def confirmMail(request):
