@@ -160,3 +160,7 @@ EMAIL_FILE_PATH = '/tmp/emails-trainingApp'
 
 # For Debug-Toolbar
 INTERNAL_IPS = ('127.0.0.1',)
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.core.context_processors.auth',
+    'django.core.context_processors.request',)

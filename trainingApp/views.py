@@ -1,5 +1,5 @@
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, RequestContext
 from models import Post, User, Author
 from datetime import datetime
 from forms import AuthorForm, UserForm, LoginForm
@@ -8,7 +8,7 @@ from django.utils.translation import gettext as _
 from django.core.urlresolvers import reverse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-
+from django.core.context_processors import request
 
 def post(request, post_id):
     return HttpResponse(post_id)
@@ -64,10 +64,7 @@ def signIn(request):
                     login(request, user)
 
                     #Session variables
-                    request.session['author__id'] = author.id
-                    request.session['author__is_verified'] = author.is_verified
-                    request.session['author__avatar'] = author.avatar
-
+                    request.session['author'] = dict(id=author.id, avatar=author.avatar, is_verified=author.is_verified)
                     #Redirect for success
                     messages.success(request,
                                      _("Login Successful."))
@@ -104,11 +101,12 @@ def profile(request, user_id):
     if not author.is_verified:
         messages.warning(request, _('Your account not verified. Please read your mail for verify process.'))
 
-    request.session['avatar'] = author.avatar
     return render(request, 'profile.html', (user, author))
+
 
 def postAdd(request):
     return render(request, 'postadd.html')
+
 
 def confirmMail(request):
     return HttpResponse('ConfirmMail')
