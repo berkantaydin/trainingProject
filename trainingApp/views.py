@@ -1,14 +1,13 @@
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render, RequestContext
+from django.shortcuts import render
 from models import Post, User, Author
 from datetime import datetime
-from forms import AuthorForm, UserForm, LoginForm
+from forms import AuthorForm, UserForm, LoginForm, PostForm, CategoryForm
 from django.contrib.auth import authenticate, login, logout
 from django.utils.translation import gettext as _
 from django.core.urlresolvers import reverse
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
-from django.core.context_processors import request
+from tasks import sendConfirmationMail
 
 def post(request, post_id):
     return HttpResponse(post_id)
@@ -31,7 +30,7 @@ def signUp(request):
             author = af.save(commit=False)
             author.user = user
             author.save()
-            ## sendConfirmationMail.delay(user.id)
+            sendConfirmationMail.delay(user.id)
             ## Resim kirpilip bicilsin, isimlendirilip kayit guncellensin - Kuyruktan update edilsin -
             messages.success(request, _('Sign Up Success!'))
             messages.info(request, _('Please go to your inbox and read the activation mail'))
@@ -105,7 +104,29 @@ def profile(request, user_id):
 
 
 def postAdd(request):
-    return render(request, 'postadd.html')
+    if request.method == "POST":
+        pf = PostForm(request.POST, prefix="post")
+        if pf.is_valid():
+            post = pf.save(commit=False)
+            post.author = Author.objects.get(pk=request.session['author']['id'])
+            post.save()
+            return HttpResponseRedirect(reverse("pagePosts", args=(post.id,)))
+    else:
+        pf = PostForm(prefix="post")
+    return render(request, 'postadd.html', dict(postForm=pf))
+
+
+def categoryAdd(request):
+    if request.method == "POST":
+        cf = CategoryForm(request.POST, prefix="category")
+        if cf.is_valid():
+            cf.save()
+            messages.success(request,
+                             _('Category Added.'))
+            return HttpResponseRedirect(reverse("pageCategoryAdd"))
+    else:
+        cf = CategoryForm(prefix="category")
+    return render(request, 'categoryadd.html', dict(categoryForm=cf))
 
 
 def confirmMail(request):

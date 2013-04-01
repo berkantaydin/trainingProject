@@ -1,7 +1,7 @@
 from django.utils.translation import ugettext as _
 from django import forms
 from django.contrib.auth.models import User
-from models import Author, Post
+from models import Author, Post, Category
 
 
 class UserForm(forms.ModelForm):
@@ -58,6 +58,12 @@ class AuthorForm(forms.ModelForm):
         fields = ['avatar']
 
 
+class CategoryForm(forms.ModelForm):
+    class Meta:
+        model = Category
+        fields = ['name']
+
+
 class LoginForm(forms.ModelForm):
     password = forms.CharField(_('Password'), widget=forms.PasswordInput,)
 
@@ -65,6 +71,9 @@ class LoginForm(forms.ModelForm):
         model = User
         fields = ['email', 'password']
 
+
 class PostForm(forms.ModelForm):
+
     class Meta:
         model = Post
+        fields = ['text_title','text_body','category','date_pub']

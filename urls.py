@@ -20,14 +20,15 @@ urlpatterns = patterns('',
 
 urlpatterns += patterns('trainingApp.views',
                         url(r'^$', 'posts', name='pageHome'),
-                        url(r'^posts/$', 'posts'),
+                        url(r'^posts/$', 'posts', name='pagePosts'),
                         url(r'^post/(?P<post_id>\d+)/$', 'post'),
                         url(r'^profile/(?P<user_id>\d+)/$', 'profile', name='pageProfile'),
                         url(r'^signUp/$', 'signUp', name='pageSignUp'),
                         url(r'^signIn/$', 'signIn', name='pageSignIn'),
                         url(r'^signOut/$', 'signOut', name='pageSignOut'),
                         url(r'^post/add/$', 'postAdd', name='pagePostAdd'),
+                        url(r'^category/add/$', 'categoryAdd', name='pageCategoryAdd'),
                         url(r'^cmail/(?P<key>\w+)$', 'confirmMail', name='pageConfirmMail'),
                         )
 
-#urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
