@@ -2,29 +2,34 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2ea4b911-347c-4f85-bca8-b1bed942894a" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/trainingApp/templates/post.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/trainingApp/models.py" afterPath="$PROJECT_DIR$/trainingApp/models.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/trainingApp/templates/posts.html" afterPath="$PROJECT_DIR$/trainingApp/templates/posts.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/settings.py" afterPath="$PROJECT_DIR$/settings.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/urls.py" afterPath="$PROJECT_DIR$/urls.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/trainingApp/views.py" afterPath="$PROJECT_DIR$/trainingApp/views.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="trainingProject.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored mask="*.pyc" />
     <ignored path="uploads/" />
-    <file path="/settings.py" changelist="2ea4b911-347c-4f85-bca8-b1bed942894a" time="1364881666389" ignored="false" />
-    <file path="/urls.py" changelist="2ea4b911-347c-4f85-bca8-b1bed942894a" time="1364820680102" ignored="false" />
-    <file path="/views.py" changelist="2ea4b911-347c-4f85-bca8-b1bed942894a" time="1364820658771" ignored="false" />
-    <file path="/models.py" changelist="2ea4b911-347c-4f85-bca8-b1bed942894a" time="1364291720676" ignored="false" />
+    <file path="/settings.py" changelist="2ea4b911-347c-4f85-bca8-b1bed942894a" time="1364882245591" ignored="false" />
+    <file path="/urls.py" changelist="2ea4b911-347c-4f85-bca8-b1bed942894a" time="1364886026634" ignored="false" />
+    <file path="/views.py" changelist="2ea4b911-347c-4f85-bca8-b1bed942894a" time="1364892902343" ignored="false" />
+    <file path="/models.py" changelist="2ea4b911-347c-4f85-bca8-b1bed942894a" time="1364889303489" ignored="false" />
     <file path="/admin.py" changelist="2ea4b911-347c-4f85-bca8-b1bed942894a" time="1364283297688" ignored="false" />
     <file path="/a.sql" changelist="2ea4b911-347c-4f85-bca8-b1bed942894a" time="1364470266829" ignored="false" />
     <file path="/Data Source" changelist="2ea4b911-347c-4f85-bca8-b1bed942894a" time="1364197877127" ignored="false" />
-    <file path="/a.regexp" changelist="2ea4b911-347c-4f85-bca8-b1bed942894a" time="1364197816908" ignored="false" />
+    <file path="/a.regexp" changelist="2ea4b911-347c-4f85-bca8-b1bed942894a" time="1364892488776" ignored="false" />
     <file path="/base.html" changelist="2ea4b911-347c-4f85-bca8-b1bed942894a" time="1364821135451" ignored="false" />
     <file path="/register.html" changelist="2ea4b911-347c-4f85-bca8-b1bed942894a" time="1364210420132" ignored="false" />
     <file path="/not_registered.html" changelist="2ea4b911-347c-4f85-bca8-b1bed942894a" time="1364207463399" ignored="false" />
-    <file path="/Django default" changelist="2ea4b911-347c-4f85-bca8-b1bed942894a" time="1364583327204" ignored="false" />
-    <file path="/posts.html" changelist="2ea4b911-347c-4f85-bca8-b1bed942894a" time="1364213856757" ignored="false" />
+    <file path="/Django default" changelist="2ea4b911-347c-4f85-bca8-b1bed942894a" time="1364892537497" ignored="false" />
+    <file path="/posts.html" changelist="2ea4b911-347c-4f85-bca8-b1bed942894a" time="1364886656367" ignored="false" />
     <file path="/signup.html" changelist="2ea4b911-347c-4f85-bca8-b1bed942894a" time="1364386475894" ignored="false" />
     <file path="/forms.py" changelist="2ea4b911-347c-4f85-bca8-b1bed942894a" time="1364819341316" ignored="false" />
-    <file path="/Dummy.txt" changelist="2ea4b911-347c-4f85-bca8-b1bed942894a" time="1364880644446" ignored="false" />
+    <file path="/Dummy.txt" changelist="2ea4b911-347c-4f85-bca8-b1bed942894a" time="1364881987529" ignored="false" />
     <file path="/fragment.py" changelist="2ea4b911-347c-4f85-bca8-b1bed942894a" time="1364820544898" ignored="false" />
     <file path="/tasks.py" changelist="2ea4b911-347c-4f85-bca8-b1bed942894a" time="1364543984973" ignored="false" />
     <file path="/signin.html" changelist="2ea4b911-347c-4f85-bca8-b1bed942894a" time="1364388619962" ignored="false" />
@@ -35,6 +40,7 @@
     <file path="/profile.html" changelist="2ea4b911-347c-4f85-bca8-b1bed942894a" time="1364795364024" ignored="false" />
     <file path="/postadd.html" changelist="2ea4b911-347c-4f85-bca8-b1bed942894a" time="1364819308063" ignored="false" />
     <file path="/categoryadd.html" changelist="2ea4b911-347c-4f85-bca8-b1bed942894a" time="1364819253533" ignored="false" />
+    <file path="/post.html" changelist="2ea4b911-347c-4f85-bca8-b1bed942894a" time="1364892749159" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,19 +71,28 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="urls.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/urls.py">
+      <file leaf-file-name="posts.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/trainingApp/templates/posts.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="1" selection-start="659" selection-end="659" vertical-scroll-proportion="0.0">
+            <state line="13" column="14" selection-start="536" selection-end="536" vertical-scroll-proportion="-8.125">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="settings.py" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="urls.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/urls.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="23" column="79" selection-start="916" selection-end="916" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="settings.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="175" column="52" selection-start="6104" selection-end="6104" vertical-scroll-proportion="0.7761194">
+            <state line="159" column="42" selection-start="5503" selection-end="5521" vertical-scroll-proportion="-13.4">
               <folding />
             </state>
           </provider>
@@ -92,19 +107,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="forms.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/trainingApp/forms.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="62" column="24" selection-start="1827" selection-end="1827" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="categoryadd.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/trainingApp/templates/categoryadd.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="27" selection-start="113" selection-end="113" vertical-scroll-proportion="0.0">
+            <state line="4" column="27" selection-start="113" selection-end="113" vertical-scroll-proportion="-2.5">
               <folding />
             </state>
           </provider>
@@ -113,8 +119,41 @@
       <file leaf-file-name="views.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/trainingApp/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="112" column="49" selection-start="4470" selection-end="4470" vertical-scroll-proportion="0.0">
+            <state line="139" column="43" selection-start="5362" selection-end="5362" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="e#0#58#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="models.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/trainingApp/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="47" column="34" selection-start="1556" selection-end="1556" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="e#0#28#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="post.html" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/trainingApp/templates/post.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="12" column="24" selection-start="278" selection-end="278" vertical-scroll-proportion="0.4157044">
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="admin.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/trainingApp/admin.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="21" column="25" selection-start="433" selection-end="433" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="e#0#32#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -137,22 +176,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/trainingApp/backends.py" />
-        <option value="$PROJECT_DIR$/README.md" />
-        <option value="$PROJECT_DIR$/trainingApp/backends/__init__.py" />
         <option value="$PROJECT_DIR$/trainingApp/backends/authentication.py" />
         <option value="$PROJECT_DIR$/trainingApp/templates/logout.html" />
         <option value="$PROJECT_DIR$/trainingApp/tasks.py" />
         <option value="dbtable:/a7fe879e/bde67feb-4cf2-4af9-a890-a15c1ae207e0/TrainingApp.public.trainingApp_author" />
-        <option value="db-console:/a7fe879e/bde67feb-4cf2-4af9-a890-a15c1ae207e0/" />
         <option value="$PROJECT_DIR$/trainingApp/templates/profile.html" />
         <option value="$PROJECT_DIR$/trainingApp/templates/postadd.html" />
         <option value="$PROJECT_DIR$/trainingApp/forms.py" />
         <option value="$PROJECT_DIR$/trainingApp/templates/categoryadd.html" />
-        <option value="$PROJECT_DIR$/trainingApp/views.py" />
-        <option value="$PROJECT_DIR$/urls.py" />
         <option value="$PROJECT_DIR$/trainingApp/templates/base.html" />
         <option value="$PROJECT_DIR$/settings.py" />
+        <option value="$PROJECT_DIR$/urls.py" />
+        <option value="$PROJECT_DIR$/trainingApp/templates/posts.html" />
+        <option value="$PROJECT_DIR$/trainingApp/models.py" />
+        <option value="db-console:/a7fe879e/bde67feb-4cf2-4af9-a890-a15c1ae207e0/" />
+        <option value="$PROJECT_DIR$/trainingApp/views.py" />
+        <option value="$PROJECT_DIR$/trainingApp/templates/post.html" />
       </list>
     </option>
   </component>
@@ -471,7 +510,11 @@
       <created>1364821533316</created>
       <updated>1364821533316</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="-redis session">
+      <created>1364881990364</created>
+      <updated>1364881990364</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -498,22 +541,22 @@
     <frame x="0" y="22" width="1440" height="874" extended-state="0" />
     <editor active="false" />
     <layout>
+      <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32804233" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.329602" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.329602" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.20444763" sideWeight="0.6007463" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24964131" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21162124" sideWeight="0.6018519" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.39814815" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998565" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20444763" sideWeight="0.6719577" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3283582" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39814815" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3283582" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32804233" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998565" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3283582" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.329602" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24964131" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21162124" sideWeight="0.6719577" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32804233" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3283582" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -557,7 +600,7 @@
     <option name="MAXIMUM_HISTORY_ROWS" value="1000" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="- add category&#10;- add post&#10;- look media" />
+    <option name="LAST_COMMIT_MESSAGE" value="-redis session" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -579,41 +622,17 @@
     <MESSAGE value="- RabbitMQ ile konuşabiliyoruz artık.&#10;- Email backend file based olarak ayarlandı." />
     <MESSAGE value="Debug toolbar" />
     <MESSAGE value="- add category&#10;- add post&#10;- look media" />
+    <MESSAGE value="-redis session" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="36" />
+      <option name="time" value="37" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/trainingApp/tests.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/trainingApp/templates/signin.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="24" selection-start="228" selection-end="228" vertical-scroll-proportion="0.13962767" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/trainingApp/tasks.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="25" selection-start="526" selection-end="526" vertical-scroll-proportion="0.28994846" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/debug_toolbar/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="32" selection-start="105" selection-end="105" vertical-scroll-proportion="0.12269939" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/trainingApp/templates/profile.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="17" selection-start="104" selection-end="133" vertical-scroll-proportion="0.13921113" />
-      </provider>
-    </entry>
     <entry file="dbDummy://dbtable:/a7fe879e/bde67feb-4cf2-4af9-a890-a15c1ae207e0/TrainingApp.public.trainingApp_author">
       <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.DatabaseTableFileEditorProvider">
         <state />
@@ -622,17 +641,7 @@
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" />
       </provider>
     </entry>
-    <entry file="dbDummy://db-console:/a7fe879e/bde67feb-4cf2-4af9-a890-a15c1ae207e0/">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="87" selection-start="0" selection-end="87" vertical-scroll-proportion="-0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/trainingApp/admin.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
@@ -644,16 +653,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/trainingApp/templates/categoryadd.html">
+    <entry file="file://$USER_HOME$/.virtualenvs/TrainingArea/lib/python2.7/site-packages/django/core/cache/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="27" selection-start="113" selection-end="113" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/trainingApp/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="112" column="49" selection-start="4470" selection-end="4470" vertical-scroll-proportion="0.0">
+        <state line="171" column="13" selection-start="5982" selection-end="5982" vertical-scroll-proportion="0.19203748">
           <folding />
         </state>
       </provider>
@@ -665,6 +667,68 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="79" selection-start="916" selection-end="916" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.virtualenvs/TrainingArea/lib/python2.7/site-packages/django/utils/importlib.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="28" column="17" selection-start="1010" selection-end="1010" vertical-scroll-proportion="0.48019803">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/trainingApp/admin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="21" column="25" selection-start="433" selection-end="433" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://db-console:/a7fe879e/bde67feb-4cf2-4af9-a890-a15c1ae207e0/">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="68" selection-start="68" selection-end="68" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/trainingApp/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="139" column="43" selection-start="5362" selection-end="5362" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#0#58#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/trainingApp/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="47" column="34" selection-start="1556" selection-end="1556" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="159" column="42" selection-start="5503" selection-end="5521" vertical-scroll-proportion="-13.4">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/trainingApp/templates/categoryadd.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="27" selection-start="113" selection-end="113" vertical-scroll-proportion="-2.5">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/trainingApp/templates/postadd.html">
       <provider selected="true" editor-type-id="text-editor">
         <state line="6" column="18" selection-start="213" selection-end="213" vertical-scroll-proportion="-3.75">
@@ -672,16 +736,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/urls.py">
+    <entry file="file://$PROJECT_DIR$/trainingApp/templates/posts.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="1" selection-start="659" selection-end="659" vertical-scroll-proportion="0.0">
+        <state line="13" column="14" selection-start="536" selection-end="536" vertical-scroll-proportion="-8.125">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/settings.py">
+    <entry file="file://$PROJECT_DIR$/trainingApp/templates/post.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="175" column="52" selection-start="6104" selection-end="6104" vertical-scroll-proportion="0.7761194">
+        <state line="12" column="24" selection-start="278" selection-end="278" vertical-scroll-proportion="0.4157044">
           <folding />
         </state>
       </provider>

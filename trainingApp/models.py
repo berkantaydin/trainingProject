@@ -48,3 +48,6 @@ class Comment(models.Model):
     text_body = models.TextField()
     is_hide = models.BooleanField(default=True)
     date_pub = models.DateTimeField(default=datetime.now)
+    to = models.CharField(max_length=1, choices=(
+        ('p', 'to Post'),  # Yorum posta atildi.
+        ('c', 'to Comment')))  # Yorum bir baska commente atildi.

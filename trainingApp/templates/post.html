@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block page %}
+    <div class="container">
+        <h2>{{ post.text_title }}</h2>
+
+        <h5>{{ post.date_pub }}</h5>
+        <br/>
+
+        <p>{{ post.text_body }}</p>
+        <hr>
+        <h2>Comments</h2>
+        <br/>Add Comment
+    </div>
+{% endblock page %}

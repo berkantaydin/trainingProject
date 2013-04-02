@@ -1,6 +1,6 @@
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
-from models import Post, User, Author
+from django.shortcuts import render, get_object_or_404
+from models import Post, User, Author, Comment
 from datetime import datetime
 from forms import AuthorForm, UserForm, LoginForm, PostForm, CategoryForm
 from django.contrib.auth import authenticate, login, logout
@@ -9,8 +9,12 @@ from django.core.urlresolvers import reverse
 from django.contrib import messages
 from tasks import sendConfirmationMail
 
+
 def post(request, post_id):
-    return HttpResponse(post_id)
+    post = get_object_or_404(Post, pk=post_id)
+    post.comments = Comment.objects.filter(to='p').filter(parent=post.id)
+    return render(request,
+                  'post.html', {'post': post},)
 
 
 def posts(request):
@@ -110,7 +114,7 @@ def postAdd(request):
             post = pf.save(commit=False)
             post.author = Author.objects.get(pk=request.session['author']['id'])
             post.save()
-            return HttpResponseRedirect(reverse("pagePosts", args=(post.id,)))
+            return HttpResponseRedirect(reverse("pagePost", args=(post.id,)))
     else:
         pf = PostForm(prefix="post")
     return render(request, 'postadd.html', dict(postForm=pf))
@@ -131,3 +135,7 @@ def categoryAdd(request):
 
 def confirmMail(request):
     return HttpResponse('ConfirmMail')
+
+
+def commentAdd(request, parent_id, to='p'):
+    return HttpResponseRedirect(reverse("pageComments"))
