@@ -1,23 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2ea4b911-347c-4f85-bca8-b1bed942894a" name="Default" comment="Debug toolbar">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/trainingApp/templates/categoryadd.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/trainingApp/templates/base.html" afterPath="$PROJECT_DIR$/trainingApp/templates/base.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/trainingApp/forms.py" afterPath="$PROJECT_DIR$/trainingApp/forms.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/trainingApp/templates/postadd.html" afterPath="$PROJECT_DIR$/trainingApp/templates/postadd.html" />
+    <list default="true" id="2ea4b911-347c-4f85-bca8-b1bed942894a" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/settings.py" afterPath="$PROJECT_DIR$/settings.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/trainingProject.iml" afterPath="$PROJECT_DIR$/.idea/trainingProject.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/urls.py" afterPath="$PROJECT_DIR$/urls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/trainingApp/views.py" afterPath="$PROJECT_DIR$/trainingApp/views.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="trainingProject.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored mask="*.pyc" />
     <ignored path="uploads/" />
-    <file path="/settings.py" changelist="2ea4b911-347c-4f85-bca8-b1bed942894a" time="1364821418311" ignored="false" />
+    <file path="/settings.py" changelist="2ea4b911-347c-4f85-bca8-b1bed942894a" time="1364881666389" ignored="false" />
     <file path="/urls.py" changelist="2ea4b911-347c-4f85-bca8-b1bed942894a" time="1364820680102" ignored="false" />
     <file path="/views.py" changelist="2ea4b911-347c-4f85-bca8-b1bed942894a" time="1364820658771" ignored="false" />
     <file path="/models.py" changelist="2ea4b911-347c-4f85-bca8-b1bed942894a" time="1364291720676" ignored="false" />
@@ -32,7 +24,7 @@
     <file path="/posts.html" changelist="2ea4b911-347c-4f85-bca8-b1bed942894a" time="1364213856757" ignored="false" />
     <file path="/signup.html" changelist="2ea4b911-347c-4f85-bca8-b1bed942894a" time="1364386475894" ignored="false" />
     <file path="/forms.py" changelist="2ea4b911-347c-4f85-bca8-b1bed942894a" time="1364819341316" ignored="false" />
-    <file path="/Dummy.txt" changelist="2ea4b911-347c-4f85-bca8-b1bed942894a" time="1364813620027" ignored="false" />
+    <file path="/Dummy.txt" changelist="2ea4b911-347c-4f85-bca8-b1bed942894a" time="1364880644446" ignored="false" />
     <file path="/fragment.py" changelist="2ea4b911-347c-4f85-bca8-b1bed942894a" time="1364820544898" ignored="false" />
     <file path="/tasks.py" changelist="2ea4b911-347c-4f85-bca8-b1bed942894a" time="1364543984973" ignored="false" />
     <file path="/signin.html" changelist="2ea4b911-347c-4f85-bca8-b1bed942894a" time="1364388619962" ignored="false" />
@@ -76,7 +68,7 @@
       <file leaf-file-name="urls.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="33" column="0" selection-start="1498" selection-end="1498" vertical-scroll-proportion="0.0">
+            <state line="18" column="1" selection-start="659" selection-end="659" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -85,7 +77,7 @@
       <file leaf-file-name="settings.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="51" column="14" selection-start="1974" selection-end="1974" vertical-scroll-proportion="0.26229507">
+            <state line="175" column="52" selection-start="6104" selection-end="6104" vertical-scroll-proportion="0.7761194">
               <folding />
             </state>
           </provider>
@@ -94,10 +86,8 @@
       <file leaf-file-name="base.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/trainingApp/templates/base.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="51" column="46" selection-start="2643" selection-end="2643" vertical-scroll-proportion="-9.166667">
-              <folding>
-                <element signature="e#2695#2715#0" expanded="true" />
-              </folding>
+            <state line="51" column="46" selection-start="2643" selection-end="2643" vertical-scroll-proportion="-4.9583335">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -106,9 +96,7 @@
         <entry file="file://$PROJECT_DIR$/trainingApp/forms.py">
           <provider selected="true" editor-type-id="text-editor">
             <state line="62" column="24" selection-start="1827" selection-end="1827" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="e#0#50#0" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -116,7 +104,7 @@
       <file leaf-file-name="categoryadd.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/trainingApp/templates/categoryadd.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="27" selection-start="113" selection-end="113" vertical-scroll-proportion="-2.5">
+            <state line="4" column="27" selection-start="113" selection-end="113" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -126,9 +114,7 @@
         <entry file="file://$PROJECT_DIR$/trainingApp/views.py">
           <provider selected="true" editor-type-id="text-editor">
             <state line="112" column="49" selection-start="4470" selection-end="4470" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="e#0#58#0" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -201,10 +187,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope">
-        <subPane subId="Project Files" />
-        <subPane subId="All" />
-      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -257,12 +239,16 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope">
+        <subPane subId="Project Files" />
+        <subPane subId="All" />
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="recentsLimit" value="5" />
-    <property name="options.lastSelected" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="options.lastSelected" value="com.jetbrains.python.configuration.PythonSdkConfigurable" />
     <property name="JdbcConsole.Extract.OpeningQuote" value="'" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/trainingApp" />
     <property name="JdbcConsole.ResultInNewTab" value="true" />
@@ -273,13 +259,13 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="JdbcConsole.EnableParameterPattern" value="false" />
     <property name="JdbcConsole.Extract.IncludeHeader" value="false" />
-    <property name="FullScreen" value="false" />
     <property name="JdbcConsole.ParameterPattern" value="(\?\d*|\:\w+|\@\w+|\$\{[^$\{\}]*\}|\$\w+\$|\#\w+\#)" />
+    <property name="FullScreen" value="false" />
     <property name="JdbcConsole.ResultPageSize" value="1000" />
     <property name="JdbcConsole.Extract.IncludeRowNumbers" value="false" />
-    <property name="options.searchVisible" value="true" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="dynamic.classpath" value="false" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="PyConsoleOptionsProvider">
     <option name="myPythonConsoleState">
@@ -316,27 +302,6 @@
       <option name="PARAMETERS" value="" />
       <method />
     </configuration>
-    <configuration default="true" type="tests" factoryName="Unittests">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <module name="trainingProject" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="" />
-      <option name="CLASS_NAME" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="FOLDER_NAME" value="" />
-      <option name="TEST_TYPE" value="TEST_SCRIPT" />
-      <option name="PATTERN" value="" />
-      <option name="USE_PATTERN" value="false" />
-      <option name="PUREUNITTEST" value="true" />
-      <option name="PARAMS" value="" />
-      <option name="USE_PARAM" value="false" />
-      <method />
-    </configuration>
     <configuration default="true" type="Python.DjangoServer" factoryName="Django server">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -356,6 +321,27 @@
       <option name="runNoReload" value="false" />
       <option name="useCustomRunCommand" value="false" />
       <option name="customRunCommand" value="" />
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Unittests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <module name="trainingProject" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <option name="PUREUNITTEST" value="true" />
+      <option name="PARAMS" value="" />
+      <option name="USE_PARAM" value="false" />
       <method />
     </configuration>
     <configuration default="true" type="tests" factoryName="Doctests">
@@ -481,7 +467,11 @@
       <created>1364795768555</created>
       <updated>1364795768555</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="- add category&#10;- add post&#10;- look media">
+      <created>1364821533316</created>
+      <updated>1364821533316</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -512,7 +502,7 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.329602" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.20444763" sideWeight="0.6007463" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24964131" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2087518" sideWeight="0.6018519" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21162124" sideWeight="0.6018519" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.39814815" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998565" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3283582" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -567,7 +557,7 @@
     <option name="MAXIMUM_HISTORY_ROWS" value="1000" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Debug toolbar" />
+    <option name="LAST_COMMIT_MESSAGE" value="- add category&#10;- add post&#10;- look media" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -588,6 +578,7 @@
     <MESSAGE value="Redirection'daki sorunlar düzeltildi." />
     <MESSAGE value="- RabbitMQ ile konuşabiliyoruz artık.&#10;- Email backend file based olarak ayarlandı." />
     <MESSAGE value="Debug toolbar" />
+    <MESSAGE value="- add category&#10;- add post&#10;- look media" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -643,41 +634,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/trainingApp/admin.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="0" selection-start="1498" selection-end="1498" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/trainingApp/templates/base.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="51" column="46" selection-start="2643" selection-end="2643" vertical-scroll-proportion="-9.166667">
-          <folding>
-            <element signature="e#2695#2715#0" expanded="true" />
-          </folding>
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/trainingApp/forms.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="62" column="24" selection-start="1827" selection-end="1827" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#0#50#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/trainingApp/templates/categoryadd.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="27" selection-start="113" selection-end="113" vertical-scroll-proportion="-2.5">
+        <state line="4" column="27" selection-start="113" selection-end="113" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -685,9 +654,14 @@
     <entry file="file://$PROJECT_DIR$/trainingApp/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="112" column="49" selection-start="4470" selection-end="4470" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#0#58#0" expanded="true" />
-          </folding>
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/trainingApp/templates/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="51" column="46" selection-start="2643" selection-end="2643" vertical-scroll-proportion="-4.9583335">
+          <folding />
         </state>
       </provider>
     </entry>
@@ -698,9 +672,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="1" selection-start="659" selection-end="659" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="51" column="14" selection-start="1974" selection-end="1974" vertical-scroll-proportion="0.26229507">
+        <state line="175" column="52" selection-start="6104" selection-end="6104" vertical-scroll-proportion="0.7761194">
           <folding />
         </state>
       </provider>
