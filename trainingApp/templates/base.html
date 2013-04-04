@@ -48,8 +48,10 @@
                                 {% if request.session.author.is_verified %}
                                     <li><a rel="tooltip" href="{% url 'pagePostAdd' %}">{% trans "Add Post" %}</li>
                                 {% endif %}
-                                <li><a rel="tooltip" href="{% url 'pageProfile' user_id=user.id %}">{% trans "Profile" %}
-                                    <img src="{{ MEDIA_URL }}{{ request.session.author.avatar }}" style="height:20px;"></a></li>
+                                <li><a rel="tooltip"
+                                       href="{% url 'pageProfile' user_id=user.id %}">{% trans "Profile" %}
+                                    <img src="{{ MEDIA_URL }}{{ request.session.author.avatar }}" style="height:20px;"></a>
+                                </li>
                                 <li><a rel="tooltip" href="{% url 'pageSignOut' %}">{% trans "Sign Out" %}<i
                                         class="icon-share-alt"></i></a></li>
                             {% else %}
@@ -68,16 +70,29 @@
 
     {% if messages %}
 
-            {% for message in messages %}
-                <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+        {% for message in messages %}
+            <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
                 <a class="close" data-dismiss="alert">×</a>
                 {% if message.tags %}<strong>{{ message.tags|capfirst }}! </strong>{% endif %}{{ message }}
-                </div>
-            {% endfor %}
+            </div>
+        {% endfor %}
 
     {% endif %}
-    {% block page %}
-    {% endblock page %}
+    {% block container %}
+        <div class="container">
+            <div class="row">
+                <div class="span8">
+                    {% block page %}
+                        page
+                    {% endblock page %}
+                </div>
+                <div class="span4">
+                    {% block menu %}
+                    {% endblock menu %}
+                </div>
+            </div>
+        </div>
+    {% endblock container %}
     {% block foot %}
     {% endblock foot %}
     </body>

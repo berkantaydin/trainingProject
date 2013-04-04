@@ -2,11 +2,9 @@
 {% load i18n %}
 {% load url from future %}
 {% block page %}
-    <div class="container">
-        <form action="{% url "pageCategoryAdd" %}" method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ categoryForm.as_p}}
-            <input type="submit" class="btn btn-primary" value="{% trans "submit" %}" />
-        </form>
-    </div>
+    <form action="{% url "pageCategoryAdd" %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ categoryForm.as_p }}
+        <input type="submit" class="btn btn-primary" value="{% trans "submit" %}"/>
+    </form>
 {% endblock page %}

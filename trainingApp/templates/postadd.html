@@ -2,13 +2,11 @@
 {% load i18n %}
 {% load url from future %}
 {% block page %}
-    <div class="container">
-        <a href="{% url "pageCategoryAdd" %}">{% trans "Add New Category" %}</a>
-        <br/><br/>
-        <form action="{% url "pagePostAdd" %}" method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ postForm.as_p}}
-            <input type="submit" class="btn btn-primary" value="{% trans "submit" %}" />
-        </form>
-    </div>
+    <a href="{% url "pageCategoryAdd" %}">{% trans "Add New Category" %}</a>
+    <br/><br/>
+    <form action="{% url "pagePostAdd" %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ postForm.as_p }}
+        <input type="submit" class="btn btn-primary" value="{% trans "submit" %}"/>
+    </form>
 {% endblock page %}
