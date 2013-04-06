@@ -7,6 +7,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.utils.translation import gettext as _
 from django.core.urlresolvers import reverse
 from django.contrib import messages
+from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from tasks import sendConfirmationMail
 
 
@@ -18,8 +19,21 @@ def post(request, post_id):
 
 
 def posts(request):
+    posts_list = Post.objects.filter(date_pub__lte=datetime.now()).order_by('-date_pub').all()
+    paginator = Paginator(posts_list, 10)  # Sayfa basina 10 adet
+
+    try:
+        page = int(request.GET.get('page', '1'))
+    except ValueError:
+        page = 1
+
+    try:
+        posts_list = paginator.page(page)
+    except (EmptyPage, InvalidPage):
+        posts_list = paginator.page(paginator.num_pages)
+
     return render(request,
-                  'posts.html', {'posts': Post.objects.filter(date_pub__lte=datetime.now()).order_by('-date_pub')[:5]},)
+                  'posts.html', {'posts': posts_list},)
 
 
 def signUp(request):
