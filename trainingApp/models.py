@@ -24,11 +24,7 @@ class Author(models.Model):
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=50, unique=True, error_messages={
-        'required': _('Please insert a name for new category'),
-        'unique': _('This category is already been registered. Please choose an another one.'), },
-        verbose_name=_('Name'),
-        help_text=_('The name is how it appears on your site.'),)
+    name = models.CharField(max_length=50, unique=True)
 
     def __unicode__(self):
         return self.name
@@ -43,11 +39,15 @@ class Post(models.Model):
 
 
 class Comment(models.Model):
-    author = models.ForeignKey(Author)
-    parent = models.ManyToManyField('self', symmetrical=False)
-    text_body = models.TextField()
-    is_hide = models.BooleanField(default=True)
+    author = models.ForeignKey(Author, null=True, blank=True)
+    parent = models.PositiveIntegerField(blank=False, null=False)
+    is_root = models.BooleanField(default=True)  # On post or On comment
+    is_pending = models.BooleanField(default=True)
     date_pub = models.DateTimeField(default=datetime.now)
-    to = models.CharField(max_length=1, choices=(
-        ('p', 'to Post'),  # Yorum posta atildi.
-        ('c', 'to Comment')))  # Yorum bir baska commente atildi.
+
+    '''
+    Onaylanmış child post sayısı
+    '''
+    def total_childs(self):
+        total = Comment.objects.filter(is_root=False).filter(is_pending=False).filter(parent=self.pk).count()
+        return total
