@@ -1,6 +1,6 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
-from models import Post, User, Author, Comment
+from models import Post, User, Author, Category, Comment
 from datetime import datetime
 from forms import AuthorForm, UserForm, LoginForm, PostForm, CategoryForm
 from django.contrib.auth import authenticate, login, logout
@@ -11,11 +11,17 @@ from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from tasks import sendConfirmationMail
 
 
-def post(request, post_id):
-    post = get_object_or_404(Post, pk=post_id)
-    post.comments = Comment.objects.filter(to='p').filter(parent=post.id)
+def post(request, slug):
+    post = get_object_or_404(Post, slug=slug)
+    #post.comments = Comment.objects.filter(to='p').filter(parent=post.id)
     return render(request,
                   'post.html', {'post': post},)
+
+
+def category(request, slug):
+    category = get_object_or_404(Category, slug=slug)
+    return render(request,
+                  'category.html', {'category': category},)
 
 
 def posts(request):
@@ -112,8 +118,8 @@ def signOut(request):
     return HttpResponseRedirect(reverse('pageHome'))
 
 
-def profile(request, user_id):
-    user = User.objects.get(pk=user_id)
+def profile(request, slug):
+    user = User.objects.get(slug=slug)
     author = Author.objects.get(user=user)
     if not author.is_verified:
         messages.warning(request, _('Your account not verified. Please read your mail for verify process.'))

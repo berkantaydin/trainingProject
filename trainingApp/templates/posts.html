@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% block page %}
-    {% if posts %}
+    {% if not posts|length > 0 %}
         {% for i in posts.object_list %}
-            <h2><a href="{% url pagePost i.id %}">{{ i.text_title }}</a></h2>
+            <h2><a href="{% url pagePost i.slug %}">{{ i.text_title }}</a></h2>
             <p>{{ i.text_body|truncatewords:30 }}</p>
             <p>
                 <a href="{% url pageProfile i.author.id %}"><img src="{{ MEDIA_URL }}{{ i.author.avatar }}"

@@ -2,6 +2,7 @@ from django.db import models
 from datetime import datetime
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext as _
+from django_extensions.db.fields import AutoSlugField
 import random
 
 
@@ -11,6 +12,7 @@ class Author(models.Model):
     is_deleted = models.BooleanField(default=False)
     is_verified = models.BooleanField(default=False)
     key_activation = models.CharField(max_length=12, default=str(random.random())[2:14])
+    slug = AutoSlugField(_('slug'), max_length=50, unique=True, populate_from=('user',))
 
     def email(self):
         return self.user.email
@@ -25,6 +27,7 @@ class Author(models.Model):
 
 class Category(models.Model):
     name = models.CharField(max_length=50, unique=True)
+    slug = AutoSlugField(_('slug'), max_length=50, unique=True, populate_from=('name',))
 
     def __unicode__(self):
         return self.name
@@ -33,6 +36,7 @@ class Category(models.Model):
 class Post(models.Model):
     category = models.ForeignKey(Category)
     author = models.ForeignKey(Author)
+    slug = AutoSlugField(_('slug'), max_length=50, unique=True, populate_from=('text_title',))
     text_title = models.CharField(max_length=70)
     text_body = models.TextField()
     date_pub = models.DateTimeField(default=datetime.now)
@@ -46,7 +50,7 @@ class Comment(models.Model):
     date_pub = models.DateTimeField(default=datetime.now)
 
     '''
-    Onaylanmış child post sayısı
+    Onaylanmis child post sayisi
     '''
     def total_childs(self):
         total = Comment.objects.filter(is_root=False).filter(is_pending=False).filter(parent=self.pk).count()
