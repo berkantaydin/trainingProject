@@ -3,6 +3,8 @@ from datetime import datetime
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext as _
 from django_extensions.db.fields import AutoSlugField
+from django.contrib.contenttypes.models import ContentType
+from django.contrib.contenttypes import generic
 import random
 
 
@@ -44,8 +46,9 @@ class Post(models.Model):
 
 class Comment(models.Model):
     author = models.ForeignKey(Author, null=True, blank=True)
-    parent = models.PositiveIntegerField(blank=False, null=False)
-    is_root = models.BooleanField(default=True)  # On post or On comment
+    parent_type = models.ForeignKey(ContentType)
+    parent_id = models.PositiveIntegerField()
+    parent_content = generic.GenericForeignKey('parent_type', 'parent_id')
     is_pending = models.BooleanField(default=True)
     date_pub = models.DateTimeField(default=datetime.now)
 

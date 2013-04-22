@@ -34,15 +34,6 @@
                     <a class="brand" href="{% url 'pageHome' %}">TrainingApp</a>
 
                     <div class="nav-collapse collapse" id="main-menu">
-                        <ul class="nav" id="main-menu-left">
-                            <li><a id="swatch-link" href="../#gallery">Gallery</a></li>
-                            <li class="dropdown">
-                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Preview <b class="caret"></b></a>
-                                <ul class="dropdown-menu" id="swatch-menu">
-                                    <li><a href="../united">United</a></li>
-                                </ul>
-                            </li>
-                        </ul>
                         <ul class="nav pull-right" id="main-menu-right">
                             {% if user.id %}
                                 {% if request.session.author.is_verified %}
@@ -88,6 +79,15 @@
                 </div>
                 <div class="span4">
                     {% block menu %}
+                        <ul class="nav nav-list">
+                            {% if contpro_categories|length > 0 %}
+                                <li class="nav-header">Categories</li>
+                                {% for categories in contpro_categories %}
+                                    <li><a href="{% url 'pageCategory' categories.slug %}">{{ categories.name }}</a>
+                                    </li>
+                                {% endfor %}
+                            {% endif %}
+                        </ul>
                     {% endblock menu %}
                 </div>
             </div>
