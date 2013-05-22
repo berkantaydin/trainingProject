@@ -1,14 +1,14 @@
 from django.utils.translation import ugettext as _
 from django import forms
 from django.contrib.auth.models import User
-from models import Author, Post, Category
+from models import Author, Post, Category, Comment
 
 
 class UserForm(forms.ModelForm):
-    username = forms.CharField(_('Username'),)
-    password = forms.CharField(_('Password'), widget=forms.PasswordInput,)
-    password_check = forms.CharField(_('Password (Again)'), widget=forms.PasswordInput,)
-    email = forms.EmailField(_('Email'), help_text='Must be valid for activation.',)
+    username = forms.CharField(_('Username'), )
+    password = forms.CharField(_('Password'), widget=forms.PasswordInput, )
+    password_check = forms.CharField(_('Password (Again)'), widget=forms.PasswordInput, )
+    email = forms.EmailField(_('Email'), help_text='Must be valid for activation.', )
 
     class Meta:
         model = User
@@ -65,7 +65,7 @@ class CategoryForm(forms.ModelForm):
 
 
 class LoginForm(forms.ModelForm):
-    password = forms.CharField(_('Password'), widget=forms.PasswordInput,)
+    password = forms.CharField(_('Password'), widget=forms.PasswordInput, )
 
     class Meta:
         model = User
@@ -73,7 +73,12 @@ class LoginForm(forms.ModelForm):
 
 
 class PostForm(forms.ModelForm):
-
     class Meta:
         model = Post
-        fields = ['text_title','text_body','category','date_pub']
+        fields = ['text_title', 'text_body', 'category', 'date_pub']
+
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['author', 'parent_type', 'parent_id', 'is_pending', 'date_pub']

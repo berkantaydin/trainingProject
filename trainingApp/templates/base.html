@@ -6,14 +6,16 @@
     <head>
         <title>{% block title %}TrainingApp{% endblock %}</title>
         {% block css %}
-            <link href="//netdna.bootstrapcdn.com/bootswatch/2.3.1/cerulean/bootstrap.min.css" rel="stylesheet">
+            <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}all_min.css"/>
+
         {% endblock css %}
         {% block js %}
+            <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
             <!--[if lt IE 9]>
-                <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
             <![endif]-->
-            <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-            <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+            <script src="{{ STATIC_URL }}all_min.js" type="text/javascript"></script>
+            <script src="{{ STATIC_URL }}general.js" type="text/javascript"></script>
         {% endblock js %}
         <script type="text/javascript">
             $(document).ready(function () {
@@ -21,74 +23,100 @@
             })
         </script>
     </head>
-    <body style="padding-top: 100px;" data-spy="scroll">
+    <body>
     {% block navbar %}
-        <div class="navbar navbar-fixed-top">
-            <div class="navbar-inner">
-                <div class="container">
-                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </a>
+        <div class="topbar">
+            <div class="fill">
+                <div class="container canvas">
                     <a class="brand" href="{% url 'pageHome' %}">TrainingApp</a>
-
-                    <div class="nav-collapse collapse" id="main-menu">
-                        <ul class="nav pull-right" id="main-menu-right">
-                            {% if user.id %}
-                                {% if request.session.author.is_verified %}
-                                    <li><a rel="tooltip" href="{% url 'pagePostAdd' %}">{% trans "Add Post" %}</li>
-                                {% endif %}
-                                <li><a rel="tooltip"
-                                       href="{% url 'pageProfile' user_id=user.id %}">{% trans "Profile" %}
-                                    <img src="{{ MEDIA_URL }}{{ request.session.author.avatar }}" style="height:20px;"></a>
-                                </li>
-                                <li><a rel="tooltip" href="{% url 'pageSignOut' %}">{% trans "Sign Out" %}<i
-                                        class="icon-share-alt"></i></a></li>
-                            {% else %}
-                                <li><a rel="tooltip" href="{% url 'pageSignUp' %}">{% trans "Sign Up" %}<i
-                                        class="icon-share-alt"></i></a></li>
-
-                                <li><a rel="tooltip" href="{% url 'pageSignIn' %}">{% trans "Sign In" %}<i
-                                        class="icon-share-alt"></i></a></li>
+                    <ul class="nav">
+                        {% if user.id %}
+                            {% if request.session.author.is_verified %}
+                                <li id="pagePostAdd"><a href="{% url 'pagePostAdd' %}">{% trans "Add Post" %}</a></li>
                             {% endif %}
-                        </ul>
-                    </div>
+                        {% else %}
+                            <li id="pageSignUp"><a href="{% url 'pageSignUp' %}">{% trans "Sign Up" %}</a></li>
+                        {% endif %}
+                    </ul>
+                    {% if user.id %}
+                        <form action="{% url 'pageSignUp' %}" method="post" accept-charset="utf-8"
+                              class="pull-right">
+                            <a href="{% url 'pageProfile' user_id=user.id %}" class="ui-button-icon-primary">Profile
+                                <img
+                                        src="{{ MEDIA_URL }}{{ request.session.author.avatar }}"
+                                        style="height:20px;padding-right: 10px;vertical-align: middle;"></a>
+                            {% csrf_token %}
+
+                            <button class="btn" type="submit"
+                                    onclick="javascript:window.location.href='{% url 'pageSettings' %}'; return false;">
+                                {% trans 'Settings' %}
+                            </button>
+                            <button class="btn" type="submit"
+                                    onclick="javascript:window.location.href='{% url "pageSignOut" %}'; return false;">
+                                {% trans "Sign Out" %}
+                            </button>
+                        </form>
+                    {% else %}
+                        <form action="{% url 'pageSignIn' %}" method="post" accept-charset="utf-8"
+                              class="pull-right"><input class="input-small" name="login-email" type="text"
+                                                        placeholder="{% trans "Email" %}">
+                            {% csrf_token %}
+                            <input class="input-small" name="login-password" type="password"
+                                   placeholder="{% trans "Password" %}">
+                            <button class="btn" type="submit">{% trans "Sign In" %}</button>
+                        </form>
+                    {% endif %}
                 </div>
             </div>
         </div>
     {% endblock navbar %}
 
-    {% if messages %}
 
-        {% for message in messages %}
-            <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
-                <a class="close" data-dismiss="alert">×</a>
-                {% if message.tags %}<strong>{{ message.tags|capfirst }}! </strong>{% endif %}{{ message }}
-            </div>
-        {% endfor %}
-
-    {% endif %}
     {% block container %}
-        <div class="container">
-            <div class="row">
-                <div class="span8">
-                    {% block page %}
-                        page
-                    {% endblock page %}
+        <div class="container canvas">
+
+            <div class="content">
+                <div class="row">
+                    <div class="span12">
+
+                        {% if messages %}
+
+                            {% for message in messages %}
+                                <div class="alert-message block-message
+                                        {% if message.tags %}{{ message.tags }}{% endif %}">
+                                    <a class="close" data-dismiss="alert">×</a>
+                                    {% if message.tags %}<strong>{{ message.tags|capfirst }}!
+                                        </strong> {% endif %}{{ message }}
+                                </div>
+                            {% endfor %}
+
+                        {% endif %}
+
+                    </div>
                 </div>
-                <div class="span4">
-                    {% block menu %}
-                        <ul class="nav nav-list">
+
+                <div class="row">
+                    <div class="span9">
+                        {% block page %}
+                            page
+                        {% endblock page %}
+                    </div>
+                    <div class="span3">
+                        {% block menu %}
                             {% if contpro_categories|length > 0 %}
-                                <li class="nav-header">Categories</li>
-                                {% for categories in contpro_categories %}
-                                    <li><a href="{% url 'pageCategory' categories.slug %}">{{ categories.name }}</a>
-                                    </li>
-                                {% endfor %}
+                                <div><h6>Categories</h6></div>{% endif %}
+
+                            {% if contpro_categories|length > 0 %}
+                                <ul class="unstyled">
+                                    {% for categories in contpro_categories %}
+                                        <li><a href="{% url 'pageCategory' categories.slug %}">{{ categories.name }}</a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
                             {% endif %}
-                        </ul>
-                    {% endblock menu %}
+
+                        {% endblock menu %}
+                    </div>
                 </div>
             </div>
         </div>

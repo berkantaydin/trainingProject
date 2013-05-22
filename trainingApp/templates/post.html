@@ -3,11 +3,37 @@
 {% block page %}
     <h2>{{ post.text_title }}</h2>
 
-    <h5>{{ post.date_pub }}</h5>
+    <div class="pull-right"><h6>{{ post.date_pub }}</h6></div>
     <br/>
 
     <p>{{ post.text_body }}</p>
     <hr>
-    <h2>Comments</h2>
-    <br/>Add Comment
+    <h6>Comments</h6>
+    <div class="pull-right"><a href="#" class="comment_add">{% trans "Add New Comment" %}</a></div>
+    <div class="clearfix"></div>
+    <div class="comment_form" hidden>
+        <form class="comment_add">
+            <div class="avatar pull-left"><img
+                    src="{{ MEDIA_URL }}{{ request.session.author.avatar }}"
+                    style="width:40px;padding-right: 10px;vertical-align: top;"></div>
+            <textarea name="comment"></textarea>
+            <input type="hidden" name="parent_id" value="0"></input>
+            <input type="hidden" name="parent_type" value="post"></input>
+            <button class="primary btn pull-right" name="submit">{% trans "Save Comment" %}</button>
+        </form>
+    </div>
+    {% for c in comment %}
+        <div class="pull-right"><a href="#" class="comment_add">{% trans "Add Response Comment" %}</a></div>
+        BURAYA OKUNMAK ÜZERE YORUM GELECEK
+        <div class="clearfix"></div>
+        <div class="comment_form" hidden>
+            <form class="comment_add">
+                <div class="avatar pull-left">AVATAR</div>
+                <textarea name="comment"></textarea>
+                <input type="hidden" name="parent_id" value="0"></input>
+                <input type="hidden" name="parent_type" value="post"></input>
+                <button class="primary btn pull-right" name="submit">{% trans "Save Comment" %}</button>
+            </form>
+        </div>
+    {% endfor %}
 {% endblock page %}

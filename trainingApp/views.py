@@ -15,13 +15,13 @@ def post(request, slug):
     post = get_object_or_404(Post, slug=slug)
     #post.comments = Comment.objects.filter(to='p').filter(parent=post.id)
     return render(request,
-                  'post.html', {'post': post},)
+                  'post.html', {'post': post}, )
 
 
 def category(request, slug):
     category = get_object_or_404(Category, slug=slug)
     return render(request,
-                  'category.html', {'category': category},)
+                  'category.html', {'category': category}, )
 
 
 def posts(request):
@@ -39,7 +39,7 @@ def posts(request):
         posts_list = paginator.page(paginator.num_pages)
 
     return render(request,
-                  'posts.html', {'posts': posts_list},)
+                  'posts.html', {'posts': posts_list}, )
 
 
 def signUp(request):
@@ -63,7 +63,7 @@ def signUp(request):
         uf = UserForm(prefix='user')
         af = AuthorForm(prefix='author')
 
-    return render(request, 'signup.html', dict(userForm=uf, authorForm=af),)
+    return render(request, 'signup.html', dict(userForm=uf, authorForm=af), )
 
 
 def signIn(request):
@@ -125,6 +125,10 @@ def profile(request, slug):
         messages.warning(request, _('Your account not verified. Please read your mail for verify process.'))
 
     return render(request, 'profile.html', (user, author))
+
+
+def settings(request):
+    return
 
 
 def postAdd(request):
