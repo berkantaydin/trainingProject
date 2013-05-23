@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.db import models
 from datetime import datetime
 from django.contrib.auth.models import User
@@ -49,12 +50,16 @@ class Comment(models.Model):
     parent_type = models.ForeignKey(ContentType)
     parent_id = models.PositiveIntegerField()
     parent_content = generic.GenericForeignKey('parent_type', 'parent_id')
+    content = models.TextField(null=False)
+    tmp_name = models.CharField(max_length=75)  # Temp olarak yazan kişinin adı -> sonradan içi boşaltılacak ve görmezden gelinecek
+    tmp_mail = models.EmailField(max_length=75)  # Temp olarak yazan kişinin maili -> sonradan eşlenecek
     is_pending = models.BooleanField(default=True)
     date_pub = models.DateTimeField(default=datetime.now)
 
     '''
     Onaylanmis child post sayisi
     '''
+
     def total_childs(self):
         total = Comment.objects.filter(is_root=False).filter(is_pending=False).filter(parent=self.pk).count()
         return total

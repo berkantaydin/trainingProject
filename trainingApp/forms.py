@@ -78,7 +78,17 @@ class PostForm(forms.ModelForm):
         fields = ['text_title', 'text_body', 'category', 'date_pub']
 
 
-class CommentForm(forms.ModelForm):
+class CommentAuthorForm(forms.ModelForm):
+    class Meta:
+        content = forms.CharField(_('Comment'))
+        parent_id = forms.CharField(widget=forms.HiddenInput())
+        parent_type = forms.CharField(widget=forms.HiddenInput())
+
+        model = Comment
+        fields = ['content','parent_id','parent_type']
+
+
+class CommentAnonymousForm(forms.ModelForm):
     class Meta:
         model = Comment
-        fields = ['author', 'parent_type', 'parent_id', 'is_pending', 'date_pub']
+        fields = ['tmp_name','tmp_mail','content']

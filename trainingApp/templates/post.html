@@ -12,13 +12,15 @@
     <div class="pull-right"><a href="#" class="comment_add">{% trans "Add New Comment" %}</a></div>
     <div class="clearfix"></div>
     <div class="comment_form" hidden>
-        <form class="comment_add">
+        <form class="comment_add" method="post" action="{% url pageCommentAdd %}">
+
             <div class="avatar pull-left"><img
                     src="{{ MEDIA_URL }}{{ request.session.author.avatar }}"
                     style="width:40px;padding-right: 10px;vertical-align: top;"></div>
-            <textarea name="comment"></textarea>
-            <input type="hidden" name="parent_id" value="0"></input>
+            {{ CommentForm }}
+            <input type="hidden" name="parent_id" value="{{ post.id }}"></input>
             <input type="hidden" name="parent_type" value="post"></input>
+            {% csrf_token %}
             <button class="primary btn pull-right" name="submit">{% trans "Save Comment" %}</button>
         </form>
     </div>
@@ -27,11 +29,12 @@
         BURAYA OKUNMAK ÜZERE YORUM GELECEK
         <div class="clearfix"></div>
         <div class="comment_form" hidden>
-            <form class="comment_add">
+            <form class="comment_add" method="post">
                 <div class="avatar pull-left">AVATAR</div>
                 <textarea name="comment"></textarea>
                 <input type="hidden" name="parent_id" value="0"></input>
                 <input type="hidden" name="parent_type" value="post"></input>
+                {% csrf_token %}
                 <button class="primary btn pull-right" name="submit">{% trans "Save Comment" %}</button>
             </form>
         </div>
