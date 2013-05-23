@@ -62,7 +62,7 @@ def signUp(request):
             author.user = user
             author.save()
             sendConfirmationMail.delay(user.id)
-            ## Resim kirpilip bicilsin, isimlendirilip kayit guncellensin - Kuyruktan update edilsin -
+            createProfileImages(user.id)
             messages.success(request, _('Sign Up Success!'))
             messages.info(request, _('Please go to your inbox and read the activation mail'))
             return HttpResponseRedirect(reverse('pageSignUp'))

@@ -4,6 +4,7 @@ from django.utils.translation import gettext as _
 from models import User
 from models import Author
 from django.core.urlresolvers import reverse
+from PIL import Image
 
 # Need for long time... Need Rabbit MQ..! OR Need Redis ?? Need some little good things.
 
@@ -20,5 +21,21 @@ def sendConfirmationMail(user_id):
     link = reverse('pageConfirmMail', kwargs={'key': author.key_activation})
 
     return send_mail(_('Activation Mail'),
-              _('Please click link for account confirmation %(confirmation_link)s') % {'confirmation_link': link},
-              'noreply@example.com', [user.email], fail_silently=False)
+                     _('Please click link for account confirmation %(confirmation_link)s') % {
+                         'confirmation_link': link},
+                     'noreply@example.com', [user.email], fail_silently=False)
+
+
+@task(ignore_result=True)
+def createProfileImages(user_id):
+    size = 64, 64
+    name = user_id + "_avatar.jpg"
+    user = User.objects.get(id=user_id)
+    author = Author.objects.get(user=user)
+    im = Image.open(author.avatar)
+    im.thumbnail(size, Image.ANTIALIAS)
+    im.save(name, "JPEG")
+    #DB Kaydet
+    author.avatar = name
+    author.save()
+    return True

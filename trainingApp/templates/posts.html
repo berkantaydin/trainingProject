@@ -6,8 +6,9 @@
             <h2><a href="{% url pagePost i.slug %}">{{ i.text_title }}</a></h2>
             <p>{{ i.text_body|truncatewords:30 }}</p>
             <p>
-                <a href="{% url pageProfile i.author.id %}"><img src="{{ MEDIA_URL }}{{ i.author.avatar }}"
-                                                                 style="height: 20px;"/>{{ i.author.user.username }}</a>
+                <a href="{% url pageProfile i.author.slug %}"><img src="{{ MEDIA_URL }}{{ i.author.avatar }}"
+                                                                   style="height: 20px;"/>{{ i.author.user.username }}
+                </a>
                 | {{ i.date_pub }}
             </p>
             <hr/>
