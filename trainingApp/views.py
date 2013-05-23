@@ -9,7 +9,7 @@ from django.utils.translation import gettext as _
 from django.core.urlresolvers import reverse
 from django.contrib import messages
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
-from tasks import sendConfirmationMail
+from tasks import sendConfirmationMail, createProfileImages
 
 
 def post(request, slug):

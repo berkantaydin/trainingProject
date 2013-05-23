@@ -6,6 +6,9 @@ from django.conf.urls.static import static
 from django.contrib import admin
 admin.autodiscover()
 
+handler404 = 'trainingApp.errors.error404'
+handler500 = 'trainingApp.errors.error500'
+
 urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'trainingProject.views.home', name='home'),
