@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% block page %}
+    <h1>{{  category.name }}</h1>
     {% if posts.object_list.count > 0 %}
         {% for i in posts.object_list %}
             <h2><a href="{% url pagePost i.slug %}">{{ i.text_title }}</a></h2>
@@ -34,6 +35,6 @@
             </div>
         {% endif %}
     {% else %}
-        <a href="{% url pagePostAdd %}">{% trans "We have not any posts yet. Would you like to post something?" %}</a>
+        {% trans "We have not any posts yet. Would you like to post something?" %}
     {% endif %}
 {% endblock page %}

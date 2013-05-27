@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load i18n %}
+{% load url from future %}
 {% block page %}
     <h2>{{ post.text_title }}</h2>
 
@@ -9,19 +10,19 @@
     <p>{{ post.text_body }}</p>
     <hr>
     <h6>Comments</h6>
-    <div class="pull-right"><a href="#" class="comment_add">{% trans "Add New Comment" %}</a></div>
+    <div class="pull-right"><a href="#" class="comment_add">{% trans "Add New Comment" %}<br/><br/></a></div>
     <div class="clearfix"></div>
     <div class="comment_form" hidden>
-        <form class="comment_add" method="post" action="{% url pageCommentAdd %}">
+        <form class="comment_add" method="post" action="{% url 'pageCommentAdd' slug=post.slug %}">
 
             <div class="avatar pull-left"><img
                     src="{{ MEDIA_URL }}{{ request.session.author.avatar }}"
-                    style="width:40px;padding-right: 10px;vertical-align: top;"></div>
-            {{ CommentForm }}
-            <input type="hidden" name="parent_id" value="{{ post.id }}"></input>
-            <input type="hidden" name="parent_type" value="post"></input>
+                    style="width:40px;padding-right: 10px;vertical-align: middle;"></div>
+            <input type="hidden" name="parent_id" value="{{ post.id }}" />
+            <input type="hidden" name="parent_type" value="post" />
+            <input type="text" name="content" class="input-xxlarge" />
             {% csrf_token %}
-            <button class="primary btn pull-right" name="submit">{% trans "Save Comment" %}</button>
+            <button class="primary btn pull-right input-large" name="submit" style="margin-left:16px;">{% trans "Save Comment" %}</button>
         </form>
     </div>
     {% for c in comment %}
@@ -32,8 +33,8 @@
             <form class="comment_add" method="post">
                 <div class="avatar pull-left">AVATAR</div>
                 <textarea name="comment"></textarea>
-                <input type="hidden" name="parent_id" value="0"></input>
-                <input type="hidden" name="parent_type" value="post"></input>
+                <input type="hidden" name="parent_id" value="0" />
+                <input type="hidden" name="parent_type" value="post" />
                 {% csrf_token %}
                 <button class="primary btn pull-right" name="submit">{% trans "Save Comment" %}</button>
             </form>

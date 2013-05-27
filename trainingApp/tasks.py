@@ -3,8 +3,10 @@ from django.core.mail import send_mail
 from django.utils.translation import gettext as _
 from models import User
 from models import Author
+from models import Comment
 from django.core.urlresolvers import reverse
 from PIL import Image
+
 
 @task(ignore_result=True)
 def sendConfirmationMail(user_id):
@@ -20,6 +22,30 @@ def sendConfirmationMail(user_id):
                      _('Please click link for account confirmation %(confirmation_link)s') % {
                          'confirmation_link': link},
                      'noreply@example.com', [user.email], fail_silently=False)
+
+
+@task(ignore_result=True)
+def sendCommentConfirmationMail(user_id):
+    user = User.objects.get(id=user_id)
+    author = Author.objects.get(user=user)
+    if author.is_verified:
+        raise ValueError(_('%s is already activated') % user.username)
+
+    ''' TODO: Burada kwargs'ları tanımla ve mail yapısına karar ver '''
+    author = Author.objects.get(user=user_id)
+    link = reverse('pageConfirmCommentWithMail', kwargs={'key': author.key_activation})
+
+    return send_mail(_('Activation Mail'),
+                     _('Please click link for account confirmation %(confirmation_link)s') % {
+                         'confirmation_link': link},
+                     'noreply@example.com', [user.email], fail_silently=False)
+
+
+@task(ignore_result=True)
+def updateComments(user_id):
+    author = Author.objects.get(id=user_id)
+    Comment.objects.filter(tmp_email=author.email).update(author=author, tmp_email='', tmp_name='')
+    return True
 
 
 @task(ignore_result=True)

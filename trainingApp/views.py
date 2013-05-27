@@ -9,7 +9,8 @@ from django.utils.translation import gettext as _
 from django.core.urlresolvers import reverse
 from django.contrib import messages
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
-from tasks import sendConfirmationMail, createProfileImages
+from tasks import sendConfirmationMail, createProfileImages, updateComments, sendCommentConfirmationMail
+import random
 
 
 def post(request, slug):
@@ -27,8 +28,21 @@ def post(request, slug):
 
 def category(request, slug):
     category = get_object_or_404(Category, slug=slug)
+    posts_list = Post.objects.filter(date_pub__lte=datetime.now()).filter(category=category).order_by('-date_pub').all()
+    paginator = Paginator(posts_list, 10)  # Sayfa basina 10 adet
+
+    try:
+        page = int(request.GET.get('page', '1'))
+    except ValueError:
+        page = 1
+
+    try:
+        posts_list = paginator.page(page)
+    except (EmptyPage, InvalidPage):
+        posts_list = paginator.page(paginator.num_pages)
+
     return render(request,
-                  'category.html', {'category': category}, )
+                  'category-posts.html', {'category': category, 'posts': posts_list}, )
 
 
 def posts(request):
@@ -62,10 +76,10 @@ def signUp(request):
             author.user = user
             author.save()
             sendConfirmationMail.delay(user.id)
-            createProfileImages(user.id)
+            createProfileImages.delay(user.id)
             messages.success(request, _('Sign Up Success!'))
             messages.info(request, _('Please go to your inbox and read the activation mail'))
-            return HttpResponseRedirect(reverse('pageSignUp'))
+            return HttpResponseRedirect(reverse('pageHome'))
     else:
         uf = UserForm(prefix='user')
         af = AuthorForm(prefix='author')
@@ -134,7 +148,6 @@ def profile(request, slug):
 
 @login_required
 def settings(request):
-
     author = Author.objects.get(slug=request.session['author']['slug'])
 
     if not author.is_verified:
@@ -171,23 +184,46 @@ def categoryAdd(request):
     return render(request, 'categoryadd.html', dict(categoryForm=cf))
 
 
-def confirmMail(request):
-    return HttpResponse('ConfirmMail')
+def confirmMail(request, key):
+    author = get_object_or_404(Author, key_activation=key, is_verified=False)
+    author.is_verified = True
+    author.save()
+    '''Mail adresine tanimli comment'leri tasi'''
+    updateComments.delay(author.id)
+    messages.success(request, _('Account Validated ! If you have any comment with this email, will be updating all.'))
+    return HttpResponseRedirect(reverse("pageHome"))
 
 
-def commentAdd(request):
+def confirmCommentWithMail(request, post_id, comment_id, key):
+    comment = get_object_or_404(Comment, id=comment_id, key=key, is_pending=True)
+    comment.is_pending = False
+    comment.save()
+    messages.success(request, _('Comment Validated !'))
+    return HttpResponseRedirect(reverse("pagePost", args=(post_id)))
+
+
+def commentAdd(request, slug):
     if request.method == 'POST':
 
         if request.user.is_authenticated():
-            cf = CommentAuthorForm(request.post, prefix="comment")
+            cf = CommentAuthorForm(request.POST, prefix="comment")
         elif request.user.is_anonymous():
-            cf = CommentAnonymousForm(request.post, prefix="comment")
+            cf = CommentAnonymousForm(request.POST, prefix="comment")
 
         if cf.is_valid():
-            return
+            if request.user.is_authenticated():
+                cf.save()
+                return HttpResponseRedirect(reverse('pagePost', args=(slug,)))
+            elif request.user.is_anonymous():
+                cf.save(commit=False)
+                cf.key = str(random.random())[2:14]
+                sendCommentConfirmationMail.delay(cf.cleaned_data['post_id'], cf.id, cf.key)
+                cf.save()
+                messages.info(request, _("Please check your mailbox and confirm your comment."))
+            return HttpResponseRedirect(reverse('pagePost', args=(slug,)))
         else:
             messages.error(request,
                            _("Please fill all fields."))
-            return HttpResponseRedirect(reverse('pagePost')),
+            return HttpResponseRedirect(reverse('pagePost', args=(slug,))),
     else:
         return

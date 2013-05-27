@@ -2,7 +2,8 @@
 {% load i18n %}
 {% load url from future %}
 {% block page %}
-    <a href="{% url "pageCategoryAdd" %}">{% trans "Add New Category" %}</a>
+    <h1>Add Post</h1>
+    <div class="pull-right"><a href="{% url "pageCategoryAdd" %}">{% trans "Add New Category" %}</a></div>
     <br/><br/>
     <form action="{% url "pagePostAdd" %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}

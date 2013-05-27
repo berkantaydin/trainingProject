@@ -5,8 +5,7 @@
 {% block page %}
     {% cache 3600 profile author.id %}
         <div class="hero-unit">
-            <img src="{{ MEDIA_URL }}{{ author.avatar }}" class="pull-left"/>
-
+            <img src="{{ MEDIA_URL }}{{ author.avatar }}"/>
             <div class="pull-right"><b>{{ author.user }}</b></div>
         </div>
     {% endcache %}

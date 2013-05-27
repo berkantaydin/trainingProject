@@ -41,7 +41,8 @@
                     {% if user.id %}
                         <form action="{% url 'pageSignUp' %}" method="post" accept-charset="utf-8"
                               class="pull-right">
-                            <a href="{% url 'pageProfile' slug=request.session.author.slug %}" class="ui-button-icon-primary">Profile
+                            <a href="{% url 'pageProfile' slug=request.session.author.slug %}"
+                               class="ui-button-icon-primary">Profile
                                 <img
                                         src="{{ MEDIA_URL }}{{ request.session.author.avatar }}"
                                         style="height:20px;padding-right: 10px;vertical-align: middle;"></a>
@@ -110,6 +111,7 @@
                                 <ul class="unstyled">
                                     {% for categories in contpro_categories %}
                                         <li><a href="{% url 'pageCategory' categories.slug %}">{{ categories.name }}</a>
+                                            ( {{ categories.post_count }} )
                                         </li>
                                     {% endfor %}
                                 </ul>

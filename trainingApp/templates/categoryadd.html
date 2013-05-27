@@ -2,6 +2,7 @@
 {% load i18n %}
 {% load url from future %}
 {% block page %}
+    <h1>Add Category</h1>
     <form action="{% url "pageCategoryAdd" %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ categoryForm.as_p }}

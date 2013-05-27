@@ -44,6 +44,10 @@ class Category(models.Model):
     name = models.CharField(max_length=50, unique=True)
     slug = AutoSlugField(_('slug'), max_length=50, unique=True, populate_from=('name',))
 
+    def post_count(self):
+        count = Post.objects.filter(category=self).count()
+        return count
+
     def __unicode__(self):
         return self.name
 
@@ -66,6 +70,7 @@ class Comment(models.Model):
     tmp_name = models.CharField(
         max_length=75)  # Temp olarak yazan kişinin adı -> sonradan içi boşaltılacak ve görmezden gelinecek
     tmp_mail = models.EmailField(max_length=75)  # Temp olarak yazan kişinin maili -> sonradan eşlenecek
+    key = models.CharField(max_length=12, default='')
     is_pending = models.BooleanField(default=True)
     date_pub = models.DateTimeField(default=datetime.now)
 

@@ -85,10 +85,10 @@ class CommentAuthorForm(forms.ModelForm):
         parent_type = forms.CharField(widget=forms.HiddenInput())
 
         model = Comment
-        fields = ['content','parent_id','parent_type']
+        fields = ['author', 'content', 'parent_id', 'parent_type']
 
 
 class CommentAnonymousForm(forms.ModelForm):
     class Meta:
         model = Comment
-        fields = ['tmp_name','tmp_mail','content']
+        fields = ['tmp_name', 'tmp_mail', 'content']
