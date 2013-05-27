@@ -24,6 +24,18 @@ class Author(models.Model):
         total = Post.objects.filter(author=self.user.id).count()
         return total
 
+    def total_comments(self):
+        total = Comment.objects.filter(author=self.user.id).count()
+        return total
+
+    def last_post(self):
+        try:
+            last_post = Post.objects.filter(author=self.user.id).filter(
+                date_pub__lte=datetime.now()).order_by('-date_pub')[0]
+            return last_post
+        except Exception:
+            return None
+
     def __unicode__(self):
         return '%s' % self.user.username
 
@@ -51,7 +63,8 @@ class Comment(models.Model):
     parent_id = models.PositiveIntegerField()
     parent_content = generic.GenericForeignKey('parent_type', 'parent_id')
     content = models.TextField(null=False)
-    tmp_name = models.CharField(max_length=75)  # Temp olarak yazan kişinin adı -> sonradan içi boşaltılacak ve görmezden gelinecek
+    tmp_name = models.CharField(
+        max_length=75)  # Temp olarak yazan kişinin adı -> sonradan içi boşaltılacak ve görmezden gelinecek
     tmp_mail = models.EmailField(max_length=75)  # Temp olarak yazan kişinin maili -> sonradan eşlenecek
     is_pending = models.BooleanField(default=True)
     date_pub = models.DateTimeField(default=datetime.now)

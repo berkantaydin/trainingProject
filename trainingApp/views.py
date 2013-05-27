@@ -103,7 +103,7 @@ def signIn(request):
                     if author.is_verified is False:
                         messages.warning(request,
                                          _("Your account not verified. Please read your mail for verify process."))
-                        return HttpResponseRedirect(reverse('pageProfile', args=(user.id,)))
+                        return HttpResponseRedirect(reverse('pageProfile', args=(author.slug,)))
 
                     return HttpResponseRedirect(reverse('pageHome'))
                 else:
@@ -129,17 +129,21 @@ def signOut(request):
 
 def profile(request, slug):
     author = Author.objects.get(slug=slug)
-    if not author.is_verified:
-        messages.warning(request, _('Your account not verified. Please read your mail for verify process.'))
-
     return render(request, 'profile.html', dict(author=author))
 
 
 @login_required
 def settings(request):
+
+    author = Author.objects.get(slug=request.session['author']['slug'])
+
+    if not author.is_verified:
+        messages.warning(request, _('Your account not verified. Please read your mail for verify process.'))
+
     return render(request, 'settings.html')
 
 
+@login_required
 def postAdd(request):
     if request.method == "POST":
         pf = PostForm(request.POST, prefix="post")

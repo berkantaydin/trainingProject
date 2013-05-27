@@ -1,5 +1,51 @@
 {% extends "base.html" %}
 {% load i18n %}
+{% load url from future %}
+{% load cache %}
 {% block page %}
-    Profile!!!{{ request.session.author.avatar }}
+    {% cache 3600 profile author.id %}
+        <div class="hero-unit">
+            <img src="{{ MEDIA_URL }}{{ author.avatar }}" class="pull-left"/>
+
+            <div class="pull-right"><b>{{ author.user }}</b></div>
+        </div>
+    {% endcache %}
+
+    <table class="condensed-table zebra-striped">
+        <tr>
+            <td>
+                {% trans "Profile Status" %}
+            </td>
+            <td>
+                {% if author.is_active %}{% trans "Active" %}{% else %}{% trans "Passive" %}{% endif %}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                {% trans "Total Posts" %}
+            </td>
+            <td>
+                {{ author.total_posts }}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                {% trans "Total Comments" %}
+            </td>
+            <td>
+                {{ author.total_comments }}
+            </td>
+        </tr>
+    {% if author.last_post %}
+        <tr>
+            <td>
+                {% trans "Last Post" %}
+            </td>
+            <td>
+                <a href="{% url 'pagePost' slug=author.last_post.slug %}">{{ author.last_post.text_title }}</a>
+            </td>
+        </tr>
+    {% endif %}
+    </table>
+
 {% endblock page %}

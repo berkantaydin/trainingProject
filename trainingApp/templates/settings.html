@@ -2,9 +2,8 @@
 {% load i18n %}
 {% load url from future %}
 {% block page %}
-    <form action="{% url "pageSignIn" %}" method="post">
-        {% csrf_token %}
-        {{ loginForm.as_p }}
-        <input type="submit" class="btn btn-primary" value="{% trans "submit" %}"/>
-    </form>
+    Bana ait son 5 post
+
+    Hesabımı kapatmak istiyorum.
+
 {% endblock page %}

@@ -6,10 +6,6 @@ from models import Author
 from django.core.urlresolvers import reverse
 from PIL import Image
 
-# Need for long time... Need Rabbit MQ..! OR Need Redis ?? Need some little good things.
-
-# Daha sonra Q'dan gonderir hale getirilecek //BA--
-
 @task(ignore_result=True)
 def sendConfirmationMail(user_id):
     user = User.objects.get(id=user_id)
@@ -29,12 +25,12 @@ def sendConfirmationMail(user_id):
 @task(ignore_result=True)
 def createProfileImages(user_id):
     size = 64, 64
-    name = user_id + "_avatar.jpg"
+    name = str(user_id) + "_avatar.jpg"
     user = User.objects.get(id=user_id)
     author = Author.objects.get(user=user)
     im = Image.open(author.avatar)
     im.thumbnail(size, Image.ANTIALIAS)
-    im.save(name, "JPEG")
+    im.save('uploads/' + str(name), "JPEG")
     #DB Kaydet
     author.avatar = name
     author.save()
