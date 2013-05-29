@@ -1,5 +1,5 @@
-redis-server
-sudo rabbitmq-server
+redis-server &
+rabbitmq-server &
 python manage.py celery worker &
 
 echo "********************************************"

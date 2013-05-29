@@ -31,7 +31,7 @@ def sendCommentConfirmationMail(user_id):
     if author.is_verified:
         raise ValueError(_('%s is already activated') % user.username)
 
-    ''' TODO: Burada kwargs'ları tanımla ve mail yapısına karar ver '''
+    ''' TODO: Burada kwargs'lari tanimla ve mail yapisina karar ver'''
     author = Author.objects.get(user=user_id)
     link = reverse('pageConfirmCommentWithMail', kwargs={'key': author.key_activation})
 

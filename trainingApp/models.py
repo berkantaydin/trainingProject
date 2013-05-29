@@ -21,16 +21,16 @@ class Author(models.Model):
         return self.user.email
 
     def total_posts(self):
-        total = Post.objects.filter(author=self.user.id).count()
+        total = Post.objects.filter(author=self.user.author).count()
         return total
 
     def total_comments(self):
-        total = Comment.objects.filter(author=self.user.id).count()
+        total = Comment.objects.filter(author=self.user.author).count()
         return total
 
     def last_post(self):
         try:
-            last_post = Post.objects.filter(author=self.user.id).filter(
+            last_post = Post.objects.filter(author=self.user.author).filter(
                 date_pub__lte=datetime.now()).order_by('-date_pub')[0]
             return last_post
         except Exception:

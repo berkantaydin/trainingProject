@@ -2,7 +2,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from models import Post, User, Author, Category, Comment
 from datetime import datetime
-from forms import AuthorForm, UserForm, LoginForm, PostForm, CategoryForm, CommentAuthorForm, CommentAnonymousForm
+from forms import AvatarForm, UserForm, LoginForm, PostForm, CategoryForm, CommentAuthorForm, CommentAnonymousForm, \
+    UserEmailForm, UserPasswordForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.utils.translation import gettext as _
@@ -22,8 +23,11 @@ def post(request, slug):
     elif request.user.is_anonymous():
         cf = CommentAnonymousForm(prefix="comment")
 
+    comment = Comment.objects.filter(is_pending=False).filter(parent_type=post).filter(parent_id=post.id).order_by(
+        '+date_pub').all()
+
     return render(request,
-                  'post.html', {'post': post, 'CommentForm': cf}, )
+                  'post.html', {'post': post, 'comment': comment, 'CommentForm': cf}, )
 
 
 def category(request, slug):
@@ -66,7 +70,7 @@ def posts(request):
 def signUp(request):
     if request.method == 'POST':
         uf = UserForm(request.POST, prefix='user')
-        af = AuthorForm(request.POST, request.FILES, prefix='author')
+        af = AvatarForm(request.POST, request.FILES, prefix='author')
         if uf.is_valid() and af.is_valid():
             user = uf.save(commit=False)
             user.is_active = True
@@ -82,9 +86,9 @@ def signUp(request):
             return HttpResponseRedirect(reverse('pageHome'))
     else:
         uf = UserForm(prefix='user')
-        af = AuthorForm(prefix='author')
+        af = AvatarForm(prefix='author')
 
-    return render(request, 'signup.html', dict(userForm=uf, authorForm=af), )
+    return render(request, 'signup.html', dict(userForm=uf, avatarForm=af), )
 
 
 def signIn(request):
@@ -153,7 +157,39 @@ def settings(request):
     if not author.is_verified:
         messages.warning(request, _('Your account not verified. Please read your mail for verify process.'))
 
-    return render(request, 'settings.html')
+    user = author.user
+
+    upf = UserPasswordForm(prefix='password')
+    uaf = AvatarForm(prefix='avatar')
+    uef = UserEmailForm(prefix='email')
+
+    if request.method == "POST":
+
+        if request.POST['type'] == "change_password":
+            upf = UserPasswordForm(request.POST, prefix='password')
+            if upf.is_valid():
+                author = upf.save()
+                createProfileImages.delay(user.id)
+                messages.success(request, _('Password Changed !'))
+                return HttpResponseRedirect(reverse('pageSettings'))
+        elif request.POST['type'] == "change_email":
+            uef = UserEmailForm(request.POST, prefix='email')
+            if uef.is_valid():
+                user.email = uef.save()
+                author.is_verified = False
+                author.save()
+                sendConfirmationMail.delay(user.id)
+                messages.success(request, _('Email Change Success!'))
+                messages.info(request, _('Please go to your inbox and read the re-activation mail'))
+                return HttpResponseRedirect(reverse('pageSettings'))
+        elif request.POST['type'] == "change_avatar":
+            uaf = AvatarForm(request.POST, request.FILES, prefix='avatar')
+            if uaf.is_valid():
+                author = uaf.save()
+                messages.success(request, _('Avatar Changed, You look good!'))
+                return HttpResponseRedirect(reverse('pageSettings'))
+
+    return render(request, 'settings.html', dict(upf=upf, uef=uef, uaf=uaf))
 
 
 @login_required
@@ -202,28 +238,39 @@ def confirmCommentWithMail(request, post_id, comment_id, key):
     return HttpResponseRedirect(reverse("pagePost", args=(post_id)))
 
 
+def deleteAccount(request):
+    author = Author.objects.get(slug=request.session['author']['slug'])
+
+    if not author.is_deleted:
+        author.is_deleted = True
+        messages.warning(request, _('Your account deleted. :('))
+
+    return HttpResponseRedirect(reverse("pageHome"))
+
+
 def commentAdd(request, slug):
     if request.method == 'POST':
 
+        r_post = request.POST.copy()
+
         if request.user.is_authenticated():
-            cf = CommentAuthorForm(request.POST, prefix="comment")
+            r_post['author'] = request.session['author']
+            cf = CommentAuthorForm(r_post, prefix="comment")
         elif request.user.is_anonymous():
-            cf = CommentAnonymousForm(request.POST, prefix="comment")
+            cf = CommentAnonymousForm(r_post, prefix="comment")
 
         if cf.is_valid():
             if request.user.is_authenticated():
                 cf.save()
-                return HttpResponseRedirect(reverse('pagePost', args=(slug,)))
+                return HttpResponseRedirect(reverse("pagePost", args=(slug,)))
             elif request.user.is_anonymous():
                 cf.save(commit=False)
                 cf.key = str(random.random())[2:14]
                 sendCommentConfirmationMail.delay(cf.cleaned_data['post_id'], cf.id, cf.key)
                 cf.save()
                 messages.info(request, _("Please check your mailbox and confirm your comment."))
-            return HttpResponseRedirect(reverse('pagePost', args=(slug,)))
+            return HttpResponseRedirect(reverse("pagePost", args=(slug,)))
         else:
             messages.error(request,
                            _("Please fill all fields."))
-            return HttpResponseRedirect(reverse('pagePost', args=(slug,))),
-    else:
-        return
+            return HttpResponseRedirect(reverse("pagePost", args=(slug,)))

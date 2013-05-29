@@ -5,10 +5,10 @@ from models import Author, Post, Category, Comment
 
 
 class UserForm(forms.ModelForm):
-    username = forms.CharField(_('Username'), )
-    password = forms.CharField(_('Password'), widget=forms.PasswordInput, )
-    password_check = forms.CharField(_('Password (Again)'), widget=forms.PasswordInput, )
-    email = forms.EmailField(_('Email'), help_text='Must be valid for activation.', )
+    username = forms.CharField(label=_('Username'), )
+    password = forms.CharField(label=_('Password'), widget=forms.PasswordInput, )
+    password_check = forms.CharField(label=_('Password (Again)'), widget=forms.PasswordInput, )
+    email = forms.EmailField(label=_('Email'), help_text='Must be valid for activation.', )
 
     class Meta:
         model = User
@@ -52,7 +52,7 @@ class UserForm(forms.ModelForm):
         return data['password_check']
 
 
-class AuthorForm(forms.ModelForm):
+class AvatarForm(forms.ModelForm):
     class Meta:
         model = Author
         fields = ['avatar']
@@ -65,7 +65,7 @@ class CategoryForm(forms.ModelForm):
 
 
 class LoginForm(forms.ModelForm):
-    password = forms.CharField(_('Password'), widget=forms.PasswordInput, )
+    password = forms.CharField(label=_('Password'), widget=forms.PasswordInput, )
 
     class Meta:
         model = User
@@ -79,16 +79,65 @@ class PostForm(forms.ModelForm):
 
 
 class CommentAuthorForm(forms.ModelForm):
-    class Meta:
-        content = forms.CharField(_('Comment'))
-        parent_id = forms.CharField(widget=forms.HiddenInput())
-        parent_type = forms.CharField(widget=forms.HiddenInput())
+    author = forms.CharField(widget=forms.HiddenInput())
+    content = forms.CharField(label=_('Comment'))
+    parent_id = forms.CharField(widget=forms.HiddenInput())
+    parent_type = forms.CharField(widget=forms.HiddenInput())
 
+    class Meta:
         model = Comment
         fields = ['author', 'content', 'parent_id', 'parent_type']
 
 
 class CommentAnonymousForm(forms.ModelForm):
+    tmp_name = forms.CharField(label=_('Name'))
+    tmp_mail = forms.EmailField(label=_('Mail'), help_text=_('Need for Validation'))
+    content = forms.CharField(label=_('Comment'))
+    parent_id = forms.CharField(widget=forms.HiddenInput())
+    parent_type = forms.CharField(widget=forms.HiddenInput())
+
     class Meta:
         model = Comment
-        fields = ['tmp_name', 'tmp_mail', 'content']
+        fields = ['tmp_name', 'tmp_mail', 'content', 'parent_id', 'parent_type']
+
+
+class UserPasswordForm(forms.ModelForm):
+    password = forms.CharField(_('Password'), widget=forms.PasswordInput, )
+    password_check = forms.CharField(_('Password (Again)'), widget=forms.PasswordInput, )
+
+    class Meta:
+        model = User
+        fields = ['password', 'password_check']
+
+    def clean_password_check(self):
+        """
+        password check
+        """
+        data = self.cleaned_data
+
+        if not data['password_check']:
+            raise forms.ValidationError(_("You must confirm your password"))
+        if data['password'] != data['password_check']:
+            raise forms.ValidationError(_("Your passwords do not match"))
+
+        return data['password_check']
+
+
+class UserEmailForm(forms.ModelForm):
+    email = forms.EmailField(label=_('Email'), help_text='Must be valid for activation.', )
+
+    class Meta:
+        model = User
+        fields = ['email']
+
+    def clean_email(self):
+        """
+        email is unique ?
+        """
+        data = self.cleaned_data
+
+        try:
+            User.objects.get(email=data['email'])
+        except User.DoesNotExist:
+            return data['email']
+        raise forms.ValidationError(_("This email is already taken"))

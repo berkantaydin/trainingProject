@@ -5,7 +5,7 @@
     <form action="{% url "pageSignUp" %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ userForm.as_p }}
-        {{ authorForm.as_p }}
+        {{ avatarForm.as_p }}
         <input type="submit" class="btn btn-primary" value="{% trans "submit" %}"/>
     </form>
 {% endblock page %}

@@ -2,8 +2,41 @@
 {% load i18n %}
 {% load url from future %}
 {% block page %}
-    Bana ait son 5 post
+    <div class="hero-unit">
+        Settings for <b>{{ request.session.author.slug }}</b>
+    </div>
 
-    Hesabımı kapatmak istiyorum.
+    <h1>{% trans "Change Password" %}</h1>
 
+    <form action="{% url "pageSettings" %}" method="post">
+        {% csrf_token %}
+        {{ upf.as_p }}
+        <input type="hidden" name="type" value="change_password"/>
+        <input type="submit" class="btn btn-primary" value="{% trans "submit" %}"/>
+    </form>
+    <hr/>
+
+    <h1>{% trans "Change Avatar" %}</h1>
+    <form action="{% url "pageSettings" %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ uaf.as_p }}
+        <input type="hidden" name="type" value="change_avatar"/>
+        <input type="submit" class="btn btn-primary" value="{% trans "submit" %}"/>
+    </form>
+    <hr/>
+
+    <h1>{% trans "Change Email" %}</h1>
+    <form action="{% url "pageSettings" %}" method="post">
+        {% csrf_token %}
+        {{ uef.as_p }}
+        <input type="hidden" name="type" value="change_email"/>
+        <input type="submit" class="btn btn-primary" value="{% trans "submit" %}"/>
+    </form>
+
+
+    <hr/>
+    <div class="pull-right">
+        <a href="{% url 'pageDeleteAccount' %}"
+           onclick="return confirm('{% trans "Your account will be delete. Are you sure ?" %}');">Delete my account</a>
+    </div>
 {% endblock page %}
