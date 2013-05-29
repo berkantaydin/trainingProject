@@ -8,6 +8,11 @@
     <br/>
 
     <p>{{ post.text_body }}</p>
+    <hr/>
+    <a href="#"
+       class="add_comment"
+       reltype="post" relid="{{ post.id }}">{% trans "Add Comment" %}</a></span>
+
     <div class="comment_form" style="display: none;">
         <form class="comment_add" method="post" action="{% url 'pageCommentAdd' slug=post.slug %}">
 
@@ -51,20 +56,24 @@
         <h6>Comments</h6>
         <table class="condensed-table" id="comment_tree">
             {% for comment in comments %}
-                {% if comment.author %}
-                    <tr data-tt-id="{{ comment.id }}"
-                        {% if comment.parent_type.name != "post" %}data-tt-parent-id="{{ comment.parent_id }}"{% endif %}>
-                        <td>{% if comment.author != "" %}
-                            <img src="{{ MEDIA_URL }}{{ comment.author.avatar }}"/>{% else %}
-                            {% trans "anonymous" %}{% endif %}</td>
-                        <td>{{ comment.author.slug }}<span class="pull-right">
-                        &nbsp;&nbsp;&nbsp;<a href="#"
-                                             class="add_comment"
-                                             rel="{{ comment.id }}">{% trans "Add Comment" %}</a></span>
-                            <hr/>
-                            {{ comment.content }}</td>
-                    </tr>
-                {% endif %}
+
+                <tr data-tt-id="{{ comment.id }}"
+                    {% if comment.parent_type.name != "post" %}data-tt-parent-id="{{ comment.parent_id }}"{% endif %}>
+                    <td>{% if comment.author %}
+                        <img src="{{ MEDIA_URL }}{{ comment.author.avatar }}"/>{% else %}
+                        <img src="{{ STATIC_URL }}treetable/images/expand.png" />{% trans "anonymous" %}
+
+                        {% endif %}</td>
+                    <td>{% if comment.author %}<a href="{% url 'pageProfile' comment.author.slug %}">{{ comment.author.slug }}</a>{% else %}
+                        {{ comment.tmp_name }}{% endif %}<span
+                            class="pull-right">
+                        &nbsp;&nbsp;&nbsp;{{ comment.date_pub }}&nbsp;&nbsp;&nbsp;<a href="#"
+                                                                                     class="add_comment"
+                                                                                     reltype="comment"
+                                                                                     relid="{{ comment.id }}">{% trans "Add Comment" %}</a></span>
+                        <hr/>
+                        {{ comment.content }}</td>
+                </tr>
             {% endfor %}
         </table>
     {% endif %}

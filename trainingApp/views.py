@@ -28,8 +28,7 @@ def post(request, slug):
                                   initial={'parent_id': post.id,
                                            'parent_type': ContentType.objects.get_for_model(post).id})
 
-    comments = Comment.objects.filter(is_pending=False).filter(
-        parent_type=ContentType.objects.get_for_model(post).id).filter(parent_id=post.id).order_by(
+    comments = Comment.objects.filter(is_pending=False).filter(base_post=post.id).order_by('parent_id').order_by(
         'date_pub').all()
 
     return render(request,
@@ -241,7 +240,7 @@ def confirmCommentWithMail(request, post_id, comment_id, key):
     comment.is_pending = False
     comment.save()
     messages.success(request, _('Comment Validated !'))
-    return HttpResponseRedirect(reverse("pagePost", args=(post_id)))
+    return HttpResponseRedirect(reverse("pagePost", args=(Post.objects.get(post_id))))
 
 
 def deleteAccount(request):
@@ -265,6 +264,7 @@ def commentAdd(request, slug):
             if request.user.is_authenticated():
                 comment = CommentAuthorForm(request.POST, prefix="comment")
                 comment = comment.save(commit=False)
+                comment.base_post = Post.objects.get(slug=slug)
                 comment.author = request.user.author
                 comment.is_pending = False
                 comment.save()
@@ -273,8 +273,9 @@ def commentAdd(request, slug):
             elif request.user.is_anonymous():
                 comment = CommentAnonymousForm(request.POST, prefix="comment")
                 comment = comment.save(commit=False)
+                comment.base_post = Post.objects.get(slug=slug)
                 comment.key = str(random.random())[2:14]
-                sendCommentConfirmationMail.delay(cf.cleaned_data['post_id'], comment.id, comment.key)
+                sendCommentConfirmationMail.delay(comment.base_post.id, comment.id, comment.key)
                 comment.save()
                 messages.info(request, _("Please check your mailbox and confirm your comment."))
                 return HttpResponseRedirect(reverse("pagePost", args=(slug,)))

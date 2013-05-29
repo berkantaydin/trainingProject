@@ -63,6 +63,7 @@ class Post(models.Model):
 
 class Comment(models.Model):
     author = models.ForeignKey(Author, null=True, blank=True)
+    base_post = models.ForeignKey(Post)
     parent_type = models.ForeignKey(ContentType)
     parent_id = models.PositiveIntegerField()
     parent_content = generic.GenericForeignKey('parent_type', 'parent_id')
