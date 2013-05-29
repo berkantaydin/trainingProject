@@ -1,13 +1,6 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% load url from future %}
-{% block js %}
-    <script type="text/javascript">
-        $(function () {
-            $('input[name="comment-author"]').val('{{ request.user.author }}');
-        });
-    </script>
-{% endblock js %}
 {% block page %}
     <h2>{{ post.text_title }}</h2>
 
@@ -15,36 +8,65 @@
     <br/>
 
     <p>{{ post.text_body }}</p>
-    <hr>
-    <h6>Add Comment</h6>
-    <div class="comment_form">
+    <div class="comment_form" style="display: none;">
         <form class="comment_add" method="post" action="{% url 'pageCommentAdd' slug=post.slug %}">
-            {% for field in CommentForm.hidden_fields %}
-                {{ field }}
-            {% endfor %}
 
-            <table class="condensed-table zebra-striped">
-                {% for field in CommentForm.visible_fields %}
-                    {% if user.is_authenticated %}
-                        <tr>
-                            <td>{{ field.label_tag }}</td>
-                            <td>{{ field }}</td>
-                        </tr>
-                    {% else %}
-                        <tr>
-                            <td>{{ field.label_tag }}</td>
-                            <td>{{ field }}</td>
-                        </tr>
-                    {% endif %}
-                {% endfor %}
-            </table>
-            <div class="actions">
-                {% csrf_token %}
-                <input type="submit" class="primary btn" value="{% trans "Save Comment" %}">
+            <div class="modal" style="position: relative; top: auto; left: auto; margin: 0 auto; z-index: 1">
+                <div class="modal-header">
+                    <a href="#" class="close">×</a>
+
+                    <h3>Add Comment</h3>
+                </div>
+                <div class="modal-body">
+                    {% for field in CommentForm.hidden_fields %}
+                        {{ field }}
+                    {% endfor %}
+
+                    <table class="condensed-table zebra-striped">
+                        {% for field in CommentForm.visible_fields %}
+                            {% if user.is_authenticated %}
+                                <tr>
+                                    <td>{{ field.label_tag }}</td>
+                                    <td>{{ field }}</td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td>{{ field.label_tag }}</td>
+                                    <td>{{ field }}</td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                    </table>
+
+                </div>
+                <div class="modal-footer">
+                    {% csrf_token %}
+                    <input type="submit" class="primary btn" value="{% trans "Save Comment" %}">
+                </div>
             </div>
         </form>
     </div>
-    <hr>
-    <h6>Comments</h6>
+    {% if comments %}
+        <hr>
+        <h6>Comments</h6>
+        <table class="condensed-table" id="comment_tree">
+            {% for comment in comments %}
+                {% if comment.author %}
+                    <tr data-tt-id="{{ comment.id }}"
+                        {% if comment.parent_type.name != "post" %}data-tt-parent-id="{{ comment.parent_id }}"{% endif %}>
+                        <td>{% if comment.author != "" %}
+                            <img src="{{ MEDIA_URL }}{{ comment.author.avatar }}"/>{% else %}
+                            {% trans "anonymous" %}{% endif %}</td>
+                        <td>{{ comment.author.slug }}<span class="pull-right">
+                        &nbsp;&nbsp;&nbsp;<a href="#"
+                                             class="add_comment"
+                                             rel="{{ comment.id }}">{% trans "Add Comment" %}</a></span>
+                            <hr/>
+                            {{ comment.content }}</td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </table>
+    {% endif %}
 
 {% endblock page %}

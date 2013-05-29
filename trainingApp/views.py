@@ -6,6 +6,7 @@ from forms import AvatarForm, UserForm, LoginForm, PostForm, CategoryForm, Comme
     UserEmailForm, UserPasswordForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.contenttypes.models import ContentType
 from django.utils.translation import gettext as _
 from django.core.urlresolvers import reverse
 from django.contrib import messages
@@ -19,15 +20,20 @@ def post(request, slug):
     #post.comments = Comment.objects.filter(to='p').filter(parent=post.id)
 
     if request.user.is_authenticated():
-        cf = CommentAuthorForm(prefix="comment")
+        cf = CommentAuthorForm(prefix="comment",
+                               initial={'parent_id': post.id,
+                                        'parent_type': ContentType.objects.get_for_model(post).id})
     elif request.user.is_anonymous():
-        cf = CommentAnonymousForm(prefix="comment")
+        cf = CommentAnonymousForm(prefix="comment",
+                                  initial={'parent_id': post.id,
+                                           'parent_type': ContentType.objects.get_for_model(post).id})
 
-    comment = Comment.objects.filter(is_pending=False).filter(parent_type=post).filter(parent_id=post.id).order_by(
-        '+date_pub').all()
+    comments = Comment.objects.filter(is_pending=False).filter(
+        parent_type=ContentType.objects.get_for_model(post).id).filter(parent_id=post.id).order_by(
+        'date_pub').all()
 
     return render(request,
-                  'post.html', {'post': post, 'comment': comment, 'CommentForm': cf}, )
+                  'post.html', {'post': post, 'comments': comments, 'CommentForm': cf}, )
 
 
 def category(request, slug):
@@ -250,26 +256,28 @@ def deleteAccount(request):
 
 def commentAdd(request, slug):
     if request.method == 'POST':
-
-        r_post = request.POST.copy()
-
         if request.user.is_authenticated():
-            r_post['author'] = request.session['author']
-            cf = CommentAuthorForm(r_post, prefix="comment")
+            cf = CommentAuthorForm(request.POST, prefix="comment")
         elif request.user.is_anonymous():
-            cf = CommentAnonymousForm(r_post, prefix="comment")
+            cf = CommentAnonymousForm(request.POST, prefix="comment")
 
         if cf.is_valid():
             if request.user.is_authenticated():
-                cf.save()
+                comment = CommentAuthorForm(request.POST, prefix="comment")
+                comment = comment.save(commit=False)
+                comment.author = request.user.author
+                comment.is_pending = False
+                comment.save()
+                messages.success(request, _("Comment Adding Success !"))
                 return HttpResponseRedirect(reverse("pagePost", args=(slug,)))
             elif request.user.is_anonymous():
-                cf.save(commit=False)
-                cf.key = str(random.random())[2:14]
-                sendCommentConfirmationMail.delay(cf.cleaned_data['post_id'], cf.id, cf.key)
-                cf.save()
+                comment = CommentAnonymousForm(request.POST, prefix="comment")
+                comment = comment.save(commit=False)
+                comment.key = str(random.random())[2:14]
+                sendCommentConfirmationMail.delay(cf.cleaned_data['post_id'], comment.id, comment.key)
+                comment.save()
                 messages.info(request, _("Please check your mailbox and confirm your comment."))
-            return HttpResponseRedirect(reverse("pagePost", args=(slug,)))
+                return HttpResponseRedirect(reverse("pagePost", args=(slug,)))
         else:
             messages.error(request,
                            _("Please fill all fields."))

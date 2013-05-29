@@ -79,22 +79,17 @@ class PostForm(forms.ModelForm):
 
 
 class CommentAuthorForm(forms.ModelForm):
-    author = forms.CharField(widget=forms.HiddenInput())
     content = forms.CharField(label=_('Comment'))
-    parent_id = forms.CharField(widget=forms.HiddenInput())
-    parent_type = forms.CharField(widget=forms.HiddenInput())
 
     class Meta:
         model = Comment
-        fields = ['author', 'content', 'parent_id', 'parent_type']
+        fields = ['content', 'parent_id', 'parent_type']
 
 
 class CommentAnonymousForm(forms.ModelForm):
     tmp_name = forms.CharField(label=_('Name'))
     tmp_mail = forms.EmailField(label=_('Mail'), help_text=_('Need for Validation'))
     content = forms.CharField(label=_('Comment'))
-    parent_id = forms.CharField(widget=forms.HiddenInput())
-    parent_type = forms.CharField(widget=forms.HiddenInput())
 
     class Meta:
         model = Comment

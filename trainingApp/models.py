@@ -72,7 +72,7 @@ class Comment(models.Model):
     tmp_mail = models.EmailField(max_length=75)  # Temp olarak yazan kişinin maili -> sonradan eşlenecek
     key = models.CharField(max_length=12, default='')
     is_pending = models.BooleanField(default=True)
-    date_pub = models.DateTimeField(default=datetime.now)
+    date_pub = models.DateTimeField(auto_now_add=True)
 
     '''
     Onaylanmis child post sayisi

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component name="dataSourceStorage">
-  <data-source source="LOCAL" name="Django default" product="PostgreSQL" version="9.2.3" jdbc-version="3.0" driver-name="PostgreSQL Native Driver" driver-version="PostgreSQL 9.1 JDBC3 (build 901)" uuid="bde67feb-4cf2-4af9-a890-a15c1ae207e0">
+  <data-source source="LOCAL" name="Django default" product="PostgreSQL" version="9.2.3" jdbc-version="3.0" driver-name="PostgreSQL Native Driver" driver-version="PostgreSQL 9.1 JDBC3 (build 901)" uuid="e3af7f1a-961d-41f5-a1ff-7b0beb5a19ec">
     <identifier-quote-string>&quot;</identifier-quote-string>
     <jdbc-driver>org.postgresql.Driver</jdbc-driver>
     <jdbc-url>jdbc:postgresql://127.0.0.1:5432/TrainingApp</jdbc-url>
