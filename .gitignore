@@ -6,3 +6,4 @@
 /uploads/
 /.idea/
 wsgi.py
+*.pyc

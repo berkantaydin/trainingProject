@@ -58,7 +58,7 @@ class Post(models.Model):
     slug = AutoSlugField(_('slug'), max_length=50, unique=True, populate_from=('text_title',))
     text_title = models.CharField(max_length=70)
     text_body = models.TextField()
-    date_pub = models.DateTimeField(default=datetime.now)
+    date_pub = models.DateTimeField(auto_now_add=True)
 
 
 class Comment(models.Model):
