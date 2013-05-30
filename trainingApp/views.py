@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.contenttypes.models import ContentType
 from django.utils.translation import gettext as _
 from django.core.urlresolvers import reverse
+from django.core.cache import cache
 from django.contrib import messages
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from tasks import sendConfirmationMail, createProfileImages, updateComments, sendCommentConfirmationMail
@@ -205,6 +206,7 @@ def postAdd(request):
             post = pf.save(commit=False)
             post.author = Author.objects.get(pk=request.session['author']['id'])
             post.save()
+            cache.clear()
             return HttpResponseRedirect(reverse("pagePost", args=(post.slug,)))
     else:
         pf = PostForm(prefix="post")
