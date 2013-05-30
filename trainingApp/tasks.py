@@ -25,20 +25,15 @@ def sendConfirmationMail(user_id):
 
 
 @task(ignore_result=True)
-def sendCommentConfirmationMail(user_id):
-    user = User.objects.get(id=user_id)
-    author = Author.objects.get(user=user)
-    if author.is_verified:
-        raise ValueError(_('%s is already activated') % user.username)
+def sendCommentConfirmationMail(comment_id):
+    comment = Comment.objects.get(id=comment_id)
+    link = reverse('pageConfirmCommentWithMail',
+                   kwargs={'post_id': comment.base_post_id, 'comment_id': comment.id, 'key': comment.key_activation})
 
-    ''' TODO: Burada kwargs'lari tanimla ve mail yapisina karar ver'''
-    author = Author.objects.get(user=user_id)
-    link = reverse('pageConfirmCommentWithMail', kwargs={'key': author.key_activation})
-
-    return send_mail(_('Activation Mail'),
-                     _('Please click link for account confirmation %(confirmation_link)s') % {
+    return send_mail(_('Comment Activation Mail'),
+                     _('Please click link for comment confirmation %(confirmation_link)s') % {
                          'confirmation_link': link},
-                     'noreply@example.com', [user.email], fail_silently=False)
+                     'noreply@example.com', [comment.tmp_mail], fail_silently=False)
 
 
 @task(ignore_result=True)

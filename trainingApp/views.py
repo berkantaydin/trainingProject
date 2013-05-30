@@ -1,3 +1,4 @@
+from Carbon.Menus import keyContextualMenuModifiers
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from models import Post, User, Author, Category, Comment
@@ -277,8 +278,8 @@ def commentAdd(request, slug):
                 comment = comment.save(commit=False)
                 comment.base_post = Post.objects.get(slug=slug)
                 comment.key = str(random.random())[2:14]
-                sendCommentConfirmationMail.delay(comment.base_post.id, comment.id, comment.key)
-                comment.save()
+                comment = comment.save()
+                sendCommentConfirmationMail.delay(comment.id)
                 messages.info(request, _("Please check your mailbox and confirm your comment."))
                 return HttpResponseRedirect(reverse("pagePost", args=(slug,)))
         else:
