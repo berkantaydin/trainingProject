@@ -56,7 +56,7 @@ class UserPasswordForm(forms.ModelForm):
         model = User
         fields = ['password', 'password_check']
 
-    def clean_password_check(self):
+    def clean(self):
         """
         password check
         """
