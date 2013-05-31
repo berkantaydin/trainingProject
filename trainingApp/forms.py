@@ -38,10 +38,9 @@ class CommentAuthorForm(forms.ModelForm):
         fields = ['content', 'parent_id', 'parent_type']
 
 
-class CommentAnonymousForm(forms.ModelForm):
+class CommentAnonymousForm(CommentAuthorForm):
     tmp_name = forms.CharField(label=_('Name'))
     tmp_mail = forms.EmailField(label=_('Mail'), help_text=_('Need for Validation'))
-    content = forms.CharField(label=_('Comment'))
 
     class Meta:
         model = Comment
@@ -67,7 +66,7 @@ class UserPasswordForm(forms.ModelForm):
         if data['password'] != data['password_check']:
             raise forms.ValidationError(_("Your passwords do not match"))
 
-        return data['password_check']
+        return data
 
 
 class UserEmailForm(forms.ModelForm):

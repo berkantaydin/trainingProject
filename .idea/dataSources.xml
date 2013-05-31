@@ -1,18 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="970159647">
-    <data-source source="LOCAL" name="Django default" product="PostgreSQL" version="9.2.3" jdbc-version="3.0" driver-name="PostgreSQL Native Driver" driver-version="PostgreSQL 9.1 JDBC3 (build 901)" uuid="e3af7f1a-961d-41f5-a1ff-7b0beb5a19ec">
-      <identifier-quote-string>&quot;</identifier-quote-string>
-      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://127.0.0.1:5432/TrainingApp</jdbc-url>
-      <user-name>postgres</user-name>
-      <user-password>dfc8dfcfdfd8dfc1dfcbdfc4dfde</user-password>
+  <component name="DataSourceManagerImpl" format="xml" hash="2521246057">
+    <data-source source="LOCAL" name="Django default" product="SQLite" version="3.7.2" jdbc-version="2.1" driver-name="SQLiteJDBC" driver-version="native" uuid="b2b18f3c-b53b-4bcc-9435-c8950bb77675">
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/TrainingApp.db</jdbc-url>
       <libraries>
         <library>
-          <url>file://$USER_HOME$/Library/Preferences/PyCharm20/jdbc-drivers/postgresql-driver-license.txt</url>
+          <url>file://$USER_HOME$/Library/Preferences/PyCharm20/jdbc-drivers/xerial-sqlite-license.txt</url>
         </library>
         <library>
-          <url>file://$USER_HOME$/Library/Preferences/PyCharm20/jdbc-drivers/postgresql-9.1-901.jdbc3.jar</url>
+          <url>file://$USER_HOME$/Library/Preferences/PyCharm20/jdbc-drivers/sqlite-jdbc-3.7.2.jar</url>
         </library>
       </libraries>
     </data-source>

@@ -2,7 +2,7 @@
 {% load i18n %}
 {% load cache %}
 {% block page %}
-    {% cache 3600 posts posts%}
+    {% cache 3600 posts %}
 
         {% if posts.object_list.count > 0 %}
             {% for i in posts.object_list %}

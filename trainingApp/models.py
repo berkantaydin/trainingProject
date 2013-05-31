@@ -16,6 +16,7 @@ class Author(models.Model):
     is_verified = models.BooleanField(default=False)
     key_activation = models.CharField(max_length=12, default=str(random.random())[2:14])
     slug = AutoSlugField(_('slug'), max_length=50, unique=True, populate_from=('user',))
+    tmp_mail = models.EmailField(default=False)
 
     def email(self):
         return self.user.email
@@ -58,7 +59,7 @@ class Post(models.Model):
     slug = AutoSlugField(_('slug'), max_length=50, unique=True, populate_from=('text_title',))
     text_title = models.CharField(max_length=70)
     text_body = models.TextField()
-    date_pub = models.DateTimeField(auto_now_add=True)
+    date_pub = models.DateTimeField(default=datetime.now())
 
 
 class Comment(models.Model):
@@ -73,12 +74,4 @@ class Comment(models.Model):
     tmp_mail = models.EmailField(max_length=75)  # Temp olarak yazan kişinin maili -> sonradan eşlenecek
     key = models.CharField(max_length=12, default='')
     is_pending = models.BooleanField(default=True)
-    date_pub = models.DateTimeField(auto_now_add=True)
-
-    '''
-    Onaylanmis child post sayisi
-    '''
-
-    def total_childs(self):
-        total = Comment.objects.filter(is_root=False).filter(is_pending=False).filter(parent=self.pk).count()
-        return total
+    date_pub = models.DateTimeField(datetime.now())

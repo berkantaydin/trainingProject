@@ -14,6 +14,7 @@ from django.core.cache import cache
 from django.contrib import messages
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from tasks import sendConfirmationMail, createProfileImages, updateComments, sendCommentConfirmationMail
+from utils import delete_template_fragment_cache
 import random
 
 
@@ -111,9 +112,9 @@ def signIn(request):
                 if user.is_active:
                     author = Author.objects.get(user=user)
 
-                    if not author.DoesNotExist:
+                    if author.is_deleted:
                         messages.error(request,
-                                       _("This user have not any author profile."))
+                                       _("Sorry! This user deleted."))
                         return HttpResponseRedirect(reverse("pageSignIn"))
 
                     login(request, user)
@@ -153,7 +154,7 @@ def signOut(request):
 
 
 def profile(request, slug):
-    author = Author.objects.get(slug=slug)
+    author = get_object_or_404(Author, slug=slug)
     return render(request, 'profile.html', dict(author=author))
 
 
@@ -175,7 +176,7 @@ def settings(request):
         if request.POST['type'] == "change_password":
             upf = UserPasswordForm(request.POST, prefix='password')
             if upf.is_valid():
-                author = upf.save()
+                upf.save()
                 createProfileImages.delay(user.id)
                 messages.success(request, _('Password Changed !'))
                 return HttpResponseRedirect(reverse('pageSettings'))
@@ -192,7 +193,7 @@ def settings(request):
         elif request.POST['type'] == "change_avatar":
             uaf = AvatarForm(request.POST, request.FILES, prefix='avatar')
             if uaf.is_valid():
-                author = uaf.save()
+                uaf.save()
                 messages.success(request, _('Avatar Changed, You look good!'))
                 return HttpResponseRedirect(reverse('pageSettings'))
 
@@ -207,7 +208,7 @@ def postAdd(request):
             post = pf.save(commit=False)
             post.author = Author.objects.get(pk=request.session['author']['id'])
             post.save()
-            cache.clear()
+            delete_template_fragment_cache('posts')
             return HttpResponseRedirect(reverse("pagePost", args=(post.slug,)))
     else:
         pf = PostForm(prefix="post")
@@ -231,6 +232,9 @@ def categoryAdd(request):
 def confirmMail(request, key):
     author = get_object_or_404(Author, key_activation=key, is_verified=False)
     author.is_verified = True
+    if author.tmp_mail is False:
+        author.email = author.tmp_mail
+        author.tmp_mail = False
     author.save()
     '''Mail adresine tanimli comment'leri tasi'''
     updateComments.delay(author.id)
@@ -251,6 +255,8 @@ def deleteAccount(request):
 
     if not author.is_deleted:
         author.is_deleted = True
+        author.user.is_active = False
+        author.save()
         messages.warning(request, _('Your account deleted. :('))
 
     return HttpResponseRedirect(reverse("pageHome"))
